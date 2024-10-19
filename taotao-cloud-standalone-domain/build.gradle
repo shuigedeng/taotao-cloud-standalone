@@ -59,6 +59,8 @@ dependencies {
     api project(":taotao-cloud-standalone-integration")
 
     //boot
+    api "io.github.shuigedeng:taotao-boot-starter-seata"
+    api "io.github.shuigedeng:taotao-boot-starter-sentinel"
     api "io.github.shuigedeng:taotao-boot-starter-apollo"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"
     api "io.github.shuigedeng:taotao-boot-starter-eventbus"
@@ -85,6 +87,8 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-job-quartz"
     //api "io.github.shuigedeng:taotao-boot-starter-job-powerjob"
     //api "io.github.shuigedeng:taotao-boot-starter-job-snail"
+    api "io.github.shuigedeng:taotao-boot-starter-statemachine"
+    api "io.github.shuigedeng:taotao-boot-starter-flowengine"
     api "io.github.shuigedeng:taotao-boot-starter-web"
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
@@ -120,7 +124,7 @@ dependencies {
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     api 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
 
-    api 'com.github.oshi:oshi-core:6.6.4'
+    api 'com.github.oshi:oshi-core:6.6.5'
 
     //api "io.github.shuigedeng:taotao-boot-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
