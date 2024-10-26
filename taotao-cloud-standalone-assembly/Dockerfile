@@ -97,6 +97,6 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
-HEALTHCHECK --interval=120s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+HEALTHCHECK --interval=120s --timeout=60s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || exit 1
 
 ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
