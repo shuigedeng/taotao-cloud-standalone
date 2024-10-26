@@ -36,9 +36,7 @@ public interface DictConvert {
     /** 实例 */
     DictConvert INSTANCE = Mappers.getMapper(DictConvert.class);
 
-	DictEntity convert(DictListQry dict);
+    DictEntity convert(DictListQry dict);
 
-	DictCO convert(DictEntity dictEntity);
-
-
+    DictCO convert(DictEntity dictEntity);
 }
