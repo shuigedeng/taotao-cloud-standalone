@@ -1344,9 +1344,7 @@ taotao:
         admin:
           addresses: http://192.168.218.2:9080/taotao-cloud-xxljob
 
-mybatis-plus-join:
-  banner: true
-  sub-table-logic: true
+
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.standalone.infrastructure.persistent.*.po  #实体扫描 多个package用户逗号或者分号分割
