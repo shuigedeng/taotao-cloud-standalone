@@ -21,10 +21,10 @@ import com.taotao.cloud.standalone.api.grpc.FirstCategoryGrpcRequest;
 import com.taotao.cloud.standalone.api.grpc.FirstCategoryGrpcResponse;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
-import net.devh.boot.grpc.server.service.GrpcService;
+//import net.devh.boot.grpc.server.service.GrpcService;
 
 @Slf4j
-@GrpcService
+//@GrpcService
 public class CategoryGrpcServiceImpl extends CategoryGrpcServiceImplBase {
 
     @Override

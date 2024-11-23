@@ -68,7 +68,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     //api "io.github.shuigedeng:taotao-boot-starter-mq-rabbitmq"
     api "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    api "io.github.shuigedeng:taotao-boot-starter-grpc"
+    //api "io.github.shuigedeng:taotao-boot-starter-grpc"
     api "io.github.shuigedeng:taotao-boot-starter-lock"
     api "io.github.shuigedeng:taotao-boot-starter-dingtalk"
     api "io.github.shuigedeng:taotao-boot-starter-laytpl"

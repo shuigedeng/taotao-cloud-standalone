@@ -20,9 +20,9 @@ import com.taotao.cloud.standalone.api.grpc.CountStoreGoodsNumGrpcRequest;
 import com.taotao.cloud.standalone.api.grpc.CountStoreGoodsNumGrpcResponse;
 import com.taotao.cloud.standalone.api.grpc.GoodsGrpcServiceGrpc.GoodsGrpcServiceImplBase;
 import io.grpc.stub.StreamObserver;
-import net.devh.boot.grpc.server.service.GrpcService;
+//import net.devh.boot.grpc.server.service.GrpcService;
 
-@GrpcService
+//@GrpcService
 public class GoodsGrpcServiceImpl extends GoodsGrpcServiceImplBase {
 
     @Override

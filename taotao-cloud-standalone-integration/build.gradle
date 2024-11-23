@@ -7,6 +7,6 @@ dependencies {
     api project(":taotao-cloud-standalone-api")
     api project(":taotao-cloud-standalone-common")
 
-    api "io.github.shuigedeng:taotao-boot-starter-grpc"
+    //api "io.github.shuigedeng:taotao-boot-starter-grpc"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"
 }
