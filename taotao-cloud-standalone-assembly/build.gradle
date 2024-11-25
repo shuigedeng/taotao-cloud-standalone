@@ -33,8 +33,8 @@ dependencies {
 //    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     testImplementation "io.github.shuigedeng:taotao-boot-starter-test"
-
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation "org.assertj:assertj-core:3.26.3"
 }
 
 
