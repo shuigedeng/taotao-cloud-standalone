@@ -21,7 +21,7 @@ public class DeptsServiceTest {
 	private DeptsServiceImpl deptsService;
 
 	@Mock
-	private DeptDomainRepository userRepository;
+	private DeptDomainRepository deptDomainRepository;
 
 	@BeforeEach
 	void setUp() {
@@ -33,16 +33,16 @@ public class DeptsServiceTest {
 		LogUtils.info("testFindUsersByName");
 
 		//// Arrange - 设置测试数据和模拟行为
-		//DeptEntity deptEntity = new DeptEntity("John Doe", 1L, "john.doe@example.com", 2);
-		//Mockito.when(userRepository.findAll()).thenReturn(List.of(deptEntity));
-		//
-		//// Act - 调用被测试的方法
-		//List<DeptEntity> users = deptsService.findAll();
-		//
-		//// Assert - 验证结果和方法调用次数
-		//Assertions.assertEquals(1, users.size(), "Should return one user");
-		//Assertions.assertEquals("John Doe", users.get(0).getName());
-		//
-		//Mockito.verify(userRepository, Mockito.times(1)).findAll();
+		DeptEntity deptEntity = new DeptEntity("John Doe", 1L, "john.doe@example.com", 2);
+		Mockito.when(deptDomainRepository.findAll()).thenReturn(List.of(deptEntity));
+
+		// Act - 调用被测试的方法
+		List<DeptEntity> users = deptsService.findAll();
+
+		// Assert - 验证结果和方法调用次数
+		Assertions.assertEquals(1, users.size(), "Should return one user");
+		Assertions.assertEquals("John Doe", users.get(0).getName());
+
+		Mockito.verify(deptDomainRepository, Mockito.times(1)).findAll();
 	}
 }
