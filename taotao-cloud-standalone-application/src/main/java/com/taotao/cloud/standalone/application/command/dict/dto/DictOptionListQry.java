@@ -15,8 +15,7 @@
  */
 
 package com.taotao.cloud.standalone.application.command.dict.dto;
-
-import com.taotao.boot.ddd.model.application.CommonCommand;
+import com.taotao.boot.ddd.model.application.dto.Command;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "DictOptionListQry", description = "查询部门下拉框选择项命令请求")
-public class DictOptionListQry extends CommonCommand {
+public class DictOptionListQry extends Command {
 
     @Schema(name = "type", description = "字典类型")
     private String type;

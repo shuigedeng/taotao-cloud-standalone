@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.application.command.dept.dto;
 
-import com.taotao.boot.ddd.model.application.CommonCommand;
+import com.taotao.boot.ddd.model.application.dto.Command;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "DeptIdsGetQry", description = "查看部门IDS命令请求")
-public class DeptIdsGetQry extends CommonCommand {
+public class DeptIdsGetQry extends Command {
 
     @Schema(name = "roleId", description = "角色ID")
     private Long roleId;

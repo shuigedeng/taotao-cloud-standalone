@@ -20,14 +20,13 @@ import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PUBLIC;
 
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.ddd.domain.model.AggregateRoot;
+import com.taotao.boot.ddd.model.domain.AggregateRoot;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
 @AllArgsConstructor(access = PUBLIC)
 @NoArgsConstructor(access = PUBLIC)

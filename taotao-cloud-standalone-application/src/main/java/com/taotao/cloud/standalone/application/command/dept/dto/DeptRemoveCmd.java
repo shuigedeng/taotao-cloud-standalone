@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.application.command.dept.dto;
 
-import com.taotao.boot.ddd.model.application.CommonCommand;
+import com.taotao.boot.ddd.model.application.dto.Command;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "DeptDeleteCmd", description = "删除部门命令请求")
-public class DeptRemoveCmd extends CommonCommand {
+public class DeptRemoveCmd extends Command {
 
     @Schema(name = "ids", description = "IDS")
     private Long[] ids;

@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.standalone.application.command.dict.dto;
 
-import com.taotao.boot.ddd.model.application.CommonCommand;
+import com.taotao.boot.ddd.model.application.dto.Command;
 import com.taotao.cloud.standalone.application.command.dict.dto.clientobject.DictCO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
 @Schema(name = "DictInsertCmd", description = "新增字典命令请求")
-public class DictInsertCmd extends CommonCommand {
+public class DictInsertCmd extends Command {
 
     @Schema(name = "dictCO", description = "字典")
     private DictCO dictCO;
