@@ -51,7 +51,7 @@
 // @RestController
 // @Tag(name = "管理端-商品管理API", description = "管理端-商品管理API")
 // @RequestMapping("/goods/manager/goods")
-// public class GoodsManagerController {
+// public class GoodsManagerController extends BusinessController {
 //
 //    /** 商品服务 */
 //    private final IGoodsService goodsService;

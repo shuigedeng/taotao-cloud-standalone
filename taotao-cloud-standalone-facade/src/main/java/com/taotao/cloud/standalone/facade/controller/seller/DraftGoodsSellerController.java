@@ -48,7 +48,7 @@
 // @RestController
 // @Tag(name = "店铺端-草稿商品API", description = "店铺端-草稿商品API")
 // @RequestMapping("/goods/seller/draft/goods")
-// public class DraftGoodsSellerController {
+// public class DraftGoodsSellerController extends BusinessController {
 //
 //    /** 草稿商品服务 */
 //    private final IDraftGoodsService draftGoodsService;

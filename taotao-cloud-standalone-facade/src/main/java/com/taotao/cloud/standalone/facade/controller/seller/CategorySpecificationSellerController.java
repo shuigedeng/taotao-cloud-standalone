@@ -41,7 +41,7 @@
 // @RestController
 // @Tag(name = "店铺端-商品分类规格API", description = "店铺端-商品分类规格API")
 // @RequestMapping("/goods/seller/category/spec")
-// public class CategorySpecificationSellerController {
+// public class CategorySpecificationSellerController extends BusinessController {
 //
 //    /** 商品规格服务 */
 //    private final ICategorySpecificationService categorySpecificationService;

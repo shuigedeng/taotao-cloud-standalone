@@ -58,7 +58,7 @@
 // @RestController
 // @Tag(name = "买家端-商品API", description = "买家端-商品API")
 // @RequestMapping("/goods/buyer/goods")
-// public class GoodsBuyerController {
+// public class GoodsBuyerController extends BusinessController {
 //
 //	/**
 //	 * 商品

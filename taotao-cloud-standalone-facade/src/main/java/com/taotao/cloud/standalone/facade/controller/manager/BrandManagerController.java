@@ -57,7 +57,7 @@
 // @RestController
 // @Tag(name = "管理端-品牌管理API", description = "管理端-品牌管理API")
 // @RequestMapping("/goods/manager/brand")
-// public class BrandManagerController {
+// public class BrandManagerController extends BusinessController {
 //
 //    /** 品牌 */
 //    private final IBrandService brandService;

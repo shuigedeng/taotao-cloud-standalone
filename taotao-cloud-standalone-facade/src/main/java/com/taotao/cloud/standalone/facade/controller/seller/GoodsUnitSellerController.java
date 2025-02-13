@@ -41,7 +41,7 @@
 // @RestController
 // @Tag(name = "店铺端-商品计量单位API", description = "店铺端-商品计量单位API")
 // @RequestMapping("/goods/seller/goods/unit")
-// public class GoodsUnitSellerController {
+// public class GoodsUnitSellerController extends BusinessController {
 //
 //    /** 商品计量单位服务 */
 //    private final IGoodsUnitService goodsUnitService;

@@ -58,7 +58,7 @@
 // @RestController
 // @Tag(name = "店铺端-商品API", description = "店铺端-商品API")
 // @RequestMapping("/goods/seller/goods")
-// public class GoodsSellerController {
+// public class GoodsSellerController extends BusinessController {
 //
 //    /** 商品 */
 //    private final IGoodsService goodsService;

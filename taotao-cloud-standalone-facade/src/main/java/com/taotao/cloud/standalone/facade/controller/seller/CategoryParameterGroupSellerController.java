@@ -41,7 +41,7 @@
 // @RestController
 // @Tag(name = "店铺端-分类绑定参数组API", description = "店铺端-分类绑定参数组API")
 // @RequestMapping("/goods/seller/category/parameters")
-// public class CategoryParameterGroupSellerController {
+// public class CategoryParameterGroupSellerController extends BusinessController {
 //
 //    /** 分类参数组服务 */
 //    private final ICategoryParameterGroupService categoryParameterGroupService;

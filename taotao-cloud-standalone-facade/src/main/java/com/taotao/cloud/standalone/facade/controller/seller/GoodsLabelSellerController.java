@@ -46,7 +46,7 @@
 // @RestController
 // @Tag(name = "店铺端-店铺分类API", description = "店铺端-店铺分类API")
 // @RequestMapping("/goods/seller/label")
-// public class GoodsLabelSellerController {
+// public class GoodsLabelSellerController extends BusinessController {
 //
 //    /** 店铺分类服务 */
 //    private final IStoreGoodsLabelService storeGoodsLabelService;

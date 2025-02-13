@@ -55,7 +55,7 @@
 // @Tag(name = "管理端-商品分类管理API", description = "管理端-商品分类管理API")
 // @RequestMapping("/goods/manager/category")
 // @CacheConfig(cacheNames = "category")
-// public class CategoryManagerController {
+// public class CategoryManagerController extends BusinessController {
 //
 //    /** 分类服务 */
 //    private final ICategoryService categoryService;

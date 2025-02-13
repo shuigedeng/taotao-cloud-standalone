@@ -44,7 +44,7 @@ import java.util.List;
 @Tag(name = "DeptsController", description = "部门管理")
 @RequiredArgsConstructor
 @RequestMapping("v1/depts")
-public class DeptsController {
+public class DeptsController extends BusinessController {
 
     private final DeptsService deptsService;
 

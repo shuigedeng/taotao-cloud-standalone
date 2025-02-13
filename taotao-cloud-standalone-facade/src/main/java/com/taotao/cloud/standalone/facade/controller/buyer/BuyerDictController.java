@@ -19,6 +19,7 @@ package com.taotao.cloud.standalone.facade.controller.buyer;
 import com.taotao.boot.common.model.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.security.spring.annotation.NotAuth;
+import com.taotao.boot.webagg.controller.BusinessController;
 import com.taotao.cloud.standalone.application.command.dict.dto.DictGetQry;
 import com.taotao.cloud.standalone.application.command.dict.dto.clientobject.DictCO;
 import com.taotao.cloud.standalone.application.service.DeptsService;
@@ -33,11 +34,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -53,7 +50,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @RestController
 @RequestMapping("/sys/buyer/dict")
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
-public class BuyerDictController {
+public class BuyerDictController extends BusinessController {
 
     private final DictsService dictsService;
     private final DeptsService deptsService;
