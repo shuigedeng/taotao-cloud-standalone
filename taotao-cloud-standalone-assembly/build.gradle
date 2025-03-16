@@ -17,7 +17,7 @@ description = "standalone中心"
 archivesBaseName = 'taotao-cloud-standalone'
 
 dependencies {
-    implementation project(":taotao-cloud-standalone-facade")
+    implementation project(":taotao-cloud-standalone-interfaces")
 
     //developmentOnly "org.springframework.boot:spring-boot-devtools"
     //developmentOnly "org.springframework.boot:spring-boot-docker-compose"

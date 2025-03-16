@@ -113,7 +113,7 @@ include "taotao-cloud-standalone-common"
 include "taotao-cloud-standalone-domain"
 include "taotao-cloud-standalone-facade"
 include "taotao-cloud-standalone-infrastructure"
-include "taotao-cloud-standalone-integration"
+include "taotao-cloud-standalone-interfaces"
 
 
 gradle.settingsEvaluated {
