@@ -18,9 +18,11 @@ package com.taotao.cloud.standalone.application.command.dept.dto;
 
 import com.taotao.boot.ddd.model.application.dto.Command;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Setter
+@Getter
+@ToString
 @Schema(name = "DeptListQry", description = "查询部门列表命令请求")
 public class DeptListQry extends Command {
 

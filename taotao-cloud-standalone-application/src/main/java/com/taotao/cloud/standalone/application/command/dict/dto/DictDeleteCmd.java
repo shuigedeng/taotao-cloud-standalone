@@ -19,10 +19,12 @@ package com.taotao.cloud.standalone.application.command.dict.dto;
 import com.taotao.boot.ddd.model.application.dto.Command;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 import lombok.NoArgsConstructor;
 
-@Data
+@Setter
+@Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "DictDeleteCmd", description = "删除字典命令请求")

@@ -16,7 +16,9 @@ import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 
-@DataJpaTest
+@Setter
+@Getter
+@ToStringJpaTest
 //@Import({com.taotao.boot.security.spring.configuration.PropertiesAutoConfiguration.class,
 //	org.springframework.cache.support.NoOpCacheManager.class,
 //	org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.class,})
