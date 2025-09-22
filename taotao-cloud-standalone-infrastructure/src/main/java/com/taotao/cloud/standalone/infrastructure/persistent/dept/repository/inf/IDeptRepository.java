@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.infrastructure.persistent.dept.repository.inf;
 
-import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
 import com.taotao.cloud.standalone.infrastructure.persistent.dept.po.DeptPO;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,7 +28,7 @@ import org.springframework.data.repository.query.Param;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IDeptRepository extends BaseInterfaceSuperRepository<DeptPO, Long> {
+public interface IDeptRepository extends JpaSuperRepository<DeptPO, Long> {
 
     @Query("select d from DeptPO d where d.version <> ?1")
     DeptPO findByVersionNot(Integer version);
