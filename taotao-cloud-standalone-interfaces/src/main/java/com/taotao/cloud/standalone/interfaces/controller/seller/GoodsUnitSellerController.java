@@ -17,9 +17,9 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 // package com.taotao.cloud.standalone.facade.controller.seller;
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
-// import com.taotao.boot.common.model.PageQuery;
-// import com.taotao.boot.common.model.PageResult;
-// import com.taotao.boot.common.model.Result;
+// import com.taotao.boot.common.model.request.PageQuery;
+// import com.taotao.boot.common.model.result.PageResult;
+// import com.taotao.boot.common.model.result.Result;
 // import io.swagger.v3.oas.annotations.Operation;
 // import io.swagger.v3.oas.annotations.tags.Tag;
 // import lombok.AllArgsConstructor;

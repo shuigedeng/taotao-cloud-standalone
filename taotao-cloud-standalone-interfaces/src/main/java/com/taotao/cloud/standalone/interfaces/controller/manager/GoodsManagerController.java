@@ -17,8 +17,8 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // package com.taotao.cloud.standalone.facade.controller.manager;
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
-// import com.taotao.boot.common.model.PageResult;
-// import com.taotao.boot.common.model.Result;
+// import com.taotao.boot.common.model.result.PageResult;
+// import com.taotao.boot.common.model.result.Result;
 // import com.taotao.cloud.standalone.api.enums.standaloneAuthEnum;
 // import com.taotao.cloud.standalone.api.enums.standaloneStatusEnum;
 // import com.taotao.boot.web.request.annotation.RequestLogger;

@@ -18,7 +18,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 //
 // import com.taotao.boot.common.enums.ResultEnum;
 // import com.taotao.boot.common.exception.BusinessException;
-// import com.taotao.boot.common.model.Result;
+// import com.taotao.boot.common.model.result.Result;
 // import com.taotao.boot.web.request.annotation.RequestLogger;
 // import io.swagger.v3.oas.annotations.Operation;
 // import io.swagger.v3.oas.annotations.Parameter;

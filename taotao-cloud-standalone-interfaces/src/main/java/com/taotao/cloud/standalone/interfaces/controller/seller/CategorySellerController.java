@@ -16,7 +16,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //
 // package com.taotao.cloud.standalone.facade.controller.seller;
 //
-// import com.taotao.boot.common.model.Result;
+// import com.taotao.boot.common.model.result.Result;
 // import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 // import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 // import com.taotao.boot.web.request.annotation.RequestLogger;

@@ -16,7 +16,7 @@ package com.taotao.cloud.standalone.interfaces.controller.buyer; /// *
 //
 // package com.taotao.cloud.standalone.facade.controller.buyer;
 //
-// import com.taotao.boot.common.model.Result;
+// import com.taotao.boot.common.model.result.Result;
 // import com.taotao.cloud.standalone.application.command.category.dto.clientobject.CategoryTreeCO;
 // import com.taotao.cloud.standalone.application.service.ICategoryService;
 // import com.taotao.boot.web.request.annotation.RequestLogger;

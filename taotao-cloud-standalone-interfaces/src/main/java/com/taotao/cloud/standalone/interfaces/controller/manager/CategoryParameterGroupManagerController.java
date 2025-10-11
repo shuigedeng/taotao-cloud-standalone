@@ -17,7 +17,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // package com.taotao.cloud.standalone.facade.controller.manager;
 //
 // import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-// import com.taotao.boot.common.model.Result;
+// import com.taotao.boot.common.model.result.Result;
 // import com.taotao.boot.web.request.annotation.RequestLogger;
 // import io.swagger.v3.oas.annotations.Operation;
 // import io.swagger.v3.oas.annotations.Parameter;
