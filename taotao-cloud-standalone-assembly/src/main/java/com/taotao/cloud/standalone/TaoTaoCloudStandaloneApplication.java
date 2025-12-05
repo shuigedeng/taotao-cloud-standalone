@@ -59,7 +59,6 @@ import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 //@ComponentScan(basePackages = {
 //	"com.taotao.cloud.standalone.biz.repository.cls"
 //} )
-//@EnableFeignClients(basePackages = {"com.taotao.cloud.standalone.api.feign","com.taotao.cloud.standalone.api.feign"})
 @TaoTaoBootApplication
 public class TaoTaoCloudStandaloneApplication {
 
