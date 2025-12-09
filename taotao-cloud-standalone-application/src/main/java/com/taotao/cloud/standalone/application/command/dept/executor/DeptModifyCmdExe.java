@@ -18,8 +18,8 @@ package com.taotao.cloud.standalone.application.command.dept.executor;
 
 import com.taotao.cloud.standalone.application.command.dept.dto.DeptModifyCmd;
 import com.taotao.cloud.standalone.application.command.dept.dto.clientobject.DeptCO;
-import com.taotao.cloud.standalone.domain.dept.entity.DeptEntity;
-import com.taotao.cloud.standalone.domain.dept.service.DeptDomainService;
+import com.taotao.cloud.standalone.domain.entity.DeptEntity;
+import com.taotao.cloud.standalone.domain.service.DeptDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

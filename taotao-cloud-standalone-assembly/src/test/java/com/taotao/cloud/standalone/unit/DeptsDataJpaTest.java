@@ -1,28 +1,26 @@
 package com.taotao.cloud.standalone.unit;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.standalone.infrastructure.persistent.dept.po.DeptPO;
-import com.taotao.cloud.standalone.infrastructure.persistent.dept.repository.inf.IDeptRepository;
+import com.taotao.cloud.standalone.infrastructure.persistent.persistence.DeptPO;
+import com.taotao.cloud.standalone.infrastructure.persistent.repository.DeptRepository;
 import jakarta.persistence.Query;
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 
 @Setter
 @Getter
-@ToStringJpaTest
 //@Import({com.taotao.boot.security.spring.configuration.PropertiesAutoConfiguration.class,
 //	org.springframework.cache.support.NoOpCacheManager.class,
 //	org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.class,})
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestPropertySource(properties = {
 	"spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver",
 	"spring.datasource.url=jdbc:mysql://192.168.218.2:3306/taotao-cloud-goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&useCursorFetch=true",
@@ -45,9 +43,7 @@ public class DeptsDataJpaTest {
 	}
 
 	@Autowired
-	private IDeptRepository deptRepository;
-	@Autowired
-	private TestEntityManager entityManager;
+	private DeptRepository deptRepository;
 
 	//@DynamicPropertySource // 动态设置测试环境下的数据库相关属性，设置使用 h2 内存数据库
 	//private static void setProperties(DynamicPropertyRegistry registry) {
@@ -68,7 +64,6 @@ public class DeptsDataJpaTest {
 
 		LogUtils.info("1111111111111111111111111111");
 
-		Query q = entityManager.getEntityManager().createQuery("from DeptPO");
 //		repo.save(u1);
 //		assertThat(q.getResultList()).hasSize(1);
 //		repo.save(u2);
@@ -78,7 +73,6 @@ public class DeptsDataJpaTest {
 //		u3.setRole(User.ADMIN);
 //		repo.save(u3);
 
-		Assertions.assertEquals(3, q.getResultList(), "");
 //		Assertions.assertEquals(
 //			entityManager.find(User.class, u.getId()).getRole()).isEqualTo(User.ADMIN);
 	}

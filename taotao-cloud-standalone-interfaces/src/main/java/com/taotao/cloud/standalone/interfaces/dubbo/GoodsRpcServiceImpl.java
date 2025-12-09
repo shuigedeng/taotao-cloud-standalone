@@ -20,7 +20,7 @@ import com.taotao.cloud.standalone.api.dubbo.GoodsRpcService;
 import com.taotao.cloud.standalone.api.dubbo.request.GoodsQueryRpcRequest;
 import com.taotao.cloud.standalone.api.dubbo.response.GoodsQueryRpcResponse;
 import lombok.AllArgsConstructor;
-import org.apache.dubbo.config.annotation.DubboService;
+//import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-@DubboService(interfaceClass = GoodsRpcService.class, validation = "true")
+//@DubboService(interfaceClass = GoodsRpcService.class, validation = "true")
 public class GoodsRpcServiceImpl implements GoodsRpcService {
 
     @Override

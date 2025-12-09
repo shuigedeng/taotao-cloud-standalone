@@ -16,9 +16,10 @@
 
 package com.taotao.cloud.standalone.infrastructure.repository;
 
-import com.taotao.cloud.standalone.domain.dept.entity.DeptEntity;
-import com.taotao.cloud.standalone.domain.dept.repository.DeptDomainRepository;
 import java.util.List;
+
+import com.taotao.cloud.standalone.domain.entity.DeptEntity;
+import com.taotao.cloud.standalone.domain.repository.DeptDomainRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class DeptDomainRepositoryImpl implements DeptDomainRepository {
     public void create(DeptEntity dept) {}
 
     @Override
-    public void modify(DeptEntity dept) {}
+    public void modify( DeptEntity dept) {}
 
     @Override
     public void remove(Long[] ids) {}

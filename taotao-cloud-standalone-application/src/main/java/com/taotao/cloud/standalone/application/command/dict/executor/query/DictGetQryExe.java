@@ -18,8 +18,7 @@ package com.taotao.cloud.standalone.application.command.dict.executor.query;
 
 import com.taotao.cloud.standalone.application.command.dict.dto.DictGetQry;
 import com.taotao.cloud.standalone.application.command.dict.dto.clientobject.DictCO;
-import com.taotao.cloud.standalone.domain.dict.service.DictDomainService;
-import com.taotao.cloud.standalone.infrastructure.persistent.dict.mapper.DictMapper;
+import com.taotao.cloud.standalone.domain.service.DictDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +32,6 @@ public class DictGetQryExe {
     private final DictDomainService dictDomainService;
     // private final DictAdapter dictAdapter;
     // private final DictConvert dictConvert;
-    private final DictMapper dictMapper;
 
     /**
      * 执行查看字典.

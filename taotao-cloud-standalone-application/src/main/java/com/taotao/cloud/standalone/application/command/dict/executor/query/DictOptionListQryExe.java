@@ -18,9 +18,9 @@ package com.taotao.cloud.standalone.application.command.dict.executor.query;
 
 import com.taotao.cloud.standalone.application.command.dict.dto.DictOptionListQry;
 import com.taotao.cloud.standalone.application.command.dict.dto.clientobject.OptionCO;
-import com.taotao.cloud.standalone.domain.dict.service.DictDomainService;
-import com.taotao.cloud.standalone.infrastructure.persistent.dict.mapper.DictMapper;
 import java.util.List;
+
+import com.taotao.cloud.standalone.domain.service.DictDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +35,6 @@ public class DictOptionListQryExe {
     private final DictDomainService dictDomainService;
     // private final DictAdapter dictAdapter;
     // private final DictConvert dictConvert;
-    private final DictMapper dictMapper;
 
     /**
      * 执行查询字典下拉框选择项列表.

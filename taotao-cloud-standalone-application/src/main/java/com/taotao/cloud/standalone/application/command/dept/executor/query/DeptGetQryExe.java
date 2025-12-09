@@ -18,8 +18,6 @@ package com.taotao.cloud.standalone.application.command.dept.executor.query;
 
 import com.taotao.cloud.standalone.application.command.dept.dto.DeptGetQry;
 import com.taotao.cloud.standalone.application.command.dept.dto.clientobject.DeptCO;
-import com.taotao.cloud.standalone.infrastructure.persistent.dept.mapper.DeptMapper;
-import com.taotao.cloud.standalone.infrastructure.persistent.dept.po.DeptPO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +29,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DeptGetQryExe {
 
-    private final DeptMapper deptMapper;
 
     /**
      * 执行查看部门.
@@ -39,18 +36,18 @@ public class DeptGetQryExe {
      * @return 部门
      */
     // @DS(TENANT)
-    public DeptCO execute(DeptGetQry qry) {
-        return convert(deptMapper.selectById(qry.getId()));
-    }
-
-    private DeptCO convert(DeptPO deptDO) {
-        //		return DeptCO.builder()
-        //			.path(deptDO.getPath())
-        //			.sort(deptDO.getSort())
-        //			.id(deptDO.getId())
-        //			.pid(deptDO.getPid())
-        //			.name(deptDO.getName())
-        //			.build();
-        return null;
-    }
+//    public DeptCO execute(DeptGetQry qry) {
+//        return convert(deptMapper.selectById(qry.getId()));
+//    }
+//
+//    private DeptCO convert(DeptPO deptDO) {
+//        //		return DeptCO.builder()
+//        //			.path(deptDO.getPath())
+//        //			.sort(deptDO.getSort())
+//        //			.id(deptDO.getId())
+//        //			.pid(deptDO.getPid())
+//        //			.name(deptDO.getName())
+//        //			.build();
+//        return null;
+//    }
 }

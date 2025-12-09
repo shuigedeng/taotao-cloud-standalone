@@ -61,7 +61,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-seata"
     api "io.github.shuigedeng:taotao-boot-starter-sentinel"
     api "io.github.shuigedeng:taotao-boot-starter-apollo"
-    api "io.github.shuigedeng:taotao-boot-starter-dubbo"
+    //api "io.github.shuigedeng:taotao-boot-starter-dubbo"
     api "io.github.shuigedeng:taotao-boot-starter-eventbus"
     //api "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     api "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"

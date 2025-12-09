@@ -23,7 +23,8 @@ import com.taotao.cloud.standalone.application.command.dept.dto.DeptListQry;
 import com.taotao.cloud.standalone.application.command.dept.dto.DeptModifyCmd;
 import com.taotao.cloud.standalone.application.command.dept.dto.DeptRemoveCmd;
 import com.taotao.cloud.standalone.application.command.dept.dto.clientobject.DeptCO;
-import com.taotao.cloud.standalone.domain.dept.entity.DeptEntity;
+import com.taotao.cloud.standalone.domain.entity.DeptEntity;
+
 import java.util.List;
 
 /**

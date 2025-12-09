@@ -27,14 +27,11 @@ import com.taotao.cloud.standalone.application.command.dept.executor.DeptCreateC
 import com.taotao.cloud.standalone.application.command.dept.executor.DeptModifyCmdExe;
 import com.taotao.cloud.standalone.application.command.dept.executor.DeptRemoveCmdExe;
 import com.taotao.cloud.standalone.application.command.dept.executor.query.DeptGetQryExe;
-import com.taotao.cloud.standalone.application.command.dept.executor.query.DeptIdsGetQryExe;
-import com.taotao.cloud.standalone.application.command.dept.executor.query.DeptListQryExe;
 import com.taotao.cloud.standalone.application.service.DeptsService;
-import com.taotao.cloud.standalone.domain.dept.entity.DeptEntity;
-import com.taotao.cloud.standalone.domain.dept.repository.DeptDomainRepository;
-import com.taotao.cloud.standalone.infrastructure.persistent.dept.mapper.DeptMapper;
-import com.taotao.cloud.standalone.infrastructure.persistent.dept.po.DeptPO;
 import java.util.List;
+
+import com.taotao.cloud.standalone.domain.entity.DeptEntity;
+import com.taotao.cloud.standalone.domain.repository.DeptDomainRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +42,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DeptsServiceImpl implements DeptsService {
 
-    private final DeptListQryExe deptListQryExe;
 
     private final DeptCreateCmdExe deptCreateCmdExe;
 
@@ -55,7 +51,6 @@ public class DeptsServiceImpl implements DeptsService {
 
     private final DeptGetQryExe deptGetQryExe;
 
-    private final DeptIdsGetQryExe deptIDSGetQryExe;
 
 	private final DeptDomainRepository deptDomainRepository;
 
@@ -67,7 +62,7 @@ public class DeptsServiceImpl implements DeptsService {
      */
     @Override
     public List<DeptCO> findList(DeptListQry qry) {
-        return deptListQryExe.execute(qry);
+        return null;
     }
 
     /**
@@ -108,7 +103,7 @@ public class DeptsServiceImpl implements DeptsService {
      */
     @Override
     public DeptCO findById(DeptGetQry qry) {
-        return deptGetQryExe.execute(qry);
+        return null;
     }
 
     /**
@@ -119,7 +114,7 @@ public class DeptsServiceImpl implements DeptsService {
      */
     @Override
     public List<Long> findIds(DeptIdsGetQry qry) {
-        return deptIDSGetQryExe.execute(qry);
+        return null;
     }
 
 	@Override

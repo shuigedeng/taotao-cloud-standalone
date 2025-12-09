@@ -17,8 +17,7 @@
 package com.taotao.cloud.standalone.application.command.dict.executor;
 
 import com.taotao.cloud.standalone.application.command.dict.dto.DictDeleteCmd;
-import com.taotao.cloud.standalone.domain.dict.service.DictDomainService;
-import com.taotao.cloud.standalone.infrastructure.persistent.dict.mapper.DictMapper;
+import com.taotao.cloud.standalone.domain.service.DictDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -35,7 +34,6 @@ public class DictDeleteCmdExe {
     private final DictDomainService dictDomainService;
     // private final DictAdapter dictAdapter;
     // private final DictConvert dictConvert;
-    private final DictMapper dictMapper;
 
     /**
      * 执行删除字典.

@@ -18,7 +18,7 @@ package com.taotao.cloud.standalone.application.converter;
 
 import com.taotao.cloud.standalone.application.command.dict.dto.DictListQry;
 import com.taotao.cloud.standalone.application.command.dict.dto.clientobject.DictCO;
-import com.taotao.cloud.standalone.domain.dict.entity.DictEntity;
+import com.taotao.cloud.standalone.domain.entity.DictEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

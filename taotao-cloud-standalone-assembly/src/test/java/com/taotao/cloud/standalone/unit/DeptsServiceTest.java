@@ -3,8 +3,8 @@ package com.taotao.cloud.standalone.unit;
 
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.standalone.application.service.impl.DeptsServiceImpl;
-import com.taotao.cloud.standalone.domain.dept.entity.DeptEntity;
-import com.taotao.cloud.standalone.domain.dept.repository.DeptDomainRepository;
+import com.taotao.cloud.standalone.domain.entity.DeptEntity;
+import com.taotao.cloud.standalone.domain.repository.DeptDomainRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,7 +41,7 @@ public class DeptsServiceTest {
 
 		// Assert - 验证结果和方法调用次数
 		Assertions.assertEquals(1, users.size(), "Should return one user");
-		Assertions.assertEquals("John Doe", users.get(0).getName());
+		Assertions.assertEquals("John Doe", users.get(0));
 
 		Mockito.verify(deptDomainRepository, Mockito.times(1)).findAll();
 	}
