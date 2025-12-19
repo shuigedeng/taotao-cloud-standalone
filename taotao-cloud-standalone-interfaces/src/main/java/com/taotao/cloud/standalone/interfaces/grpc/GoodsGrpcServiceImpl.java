@@ -18,16 +18,26 @@ package com.taotao.cloud.standalone.interfaces.grpc;
 
 import com.taotao.cloud.standalone.api.grpc.CountStoreGoodsNumGrpcRequest;
 import com.taotao.cloud.standalone.api.grpc.CountStoreGoodsNumGrpcResponse;
+import com.taotao.cloud.standalone.api.grpc.GoodsGrpcServiceGrpc;
 import com.taotao.cloud.standalone.api.grpc.GoodsGrpcServiceGrpc.GoodsGrpcServiceImplBase;
 import io.grpc.stub.StreamObserver;
 //import net.devh.boot.grpc.server.service.GrpcService;
 
+//import net.devh.boot.grpc.server.service.GrpcService;
+
 //@GrpcService
+/**
+ * GoodsGrpcServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GoodsGrpcServiceImpl extends GoodsGrpcServiceImplBase {
 
     @Override
     public void countStoreGoodsNum(
-            CountStoreGoodsNumGrpcRequest request, StreamObserver<CountStoreGoodsNumGrpcResponse> responseObserver) {
+            CountStoreGoodsNumGrpcRequest request, StreamObserver<CountStoreGoodsNumGrpcResponse> responseObserver ) {
         super.countStoreGoodsNum(request, responseObserver);
     }
 }

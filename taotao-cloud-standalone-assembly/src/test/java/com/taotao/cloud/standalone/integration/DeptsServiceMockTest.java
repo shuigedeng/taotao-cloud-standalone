@@ -24,9 +24,17 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 // @ActiveProfiles("test")
 // @TestPropertySource({"classpath:application-test.yml"})
+/**
+ * DeptsServiceMockTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DeptsServiceMockTest extends TaoTaoCloudStandaloneApplicationTests {
+
     @MockitoBean
-	DeptsService mockBeanService;
+    DeptsService mockBeanService;
 
     @Test
     @DisplayName("MockBean的正确姿势")

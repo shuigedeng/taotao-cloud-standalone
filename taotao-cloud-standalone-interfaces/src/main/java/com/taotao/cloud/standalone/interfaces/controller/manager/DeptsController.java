@@ -41,6 +41,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * DeptsController
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @RestController
 @Tag(name = "DeptsController", description = "部门管理")
 @RequiredArgsConstructor
@@ -52,14 +59,14 @@ public class DeptsController extends BusinessController {
     @PostMapping("list")
     @Operation(summary = "部门管理", description = "查询菜单列表")
     @PreAuthorize("hasAuthority('depts:list')")
-    public Result<List<DeptCO>> findList(@RequestBody DeptListQry qry) {
+    public Result<List<DeptCO>> findList( @RequestBody DeptListQry qry ) {
         return Result.success(deptsService.findList(qry));
     }
 
     @PostMapping
     @Operation(summary = "部门管理", description = "新增菜单")
     @PreAuthorize("hasAuthority('depts:create')")
-    public Result<Boolean> create(@RequestBody DeptCreateCmd cmd) {
+    public Result<Boolean> create( @RequestBody DeptCreateCmd cmd ) {
         deptsService.create(cmd);
         return Result.success(true);
     }
@@ -67,28 +74,28 @@ public class DeptsController extends BusinessController {
     @PutMapping
     @Operation(summary = "部门管理", description = "修改菜单")
     @PreAuthorize("hasAuthority('depts:modify')")
-    public Result<Boolean> modify(@RequestBody DeptModifyCmd cmd) {
+    public Result<Boolean> modify( @RequestBody DeptModifyCmd cmd ) {
         deptsService.modify(cmd);
         return Result.success(true);
     }
 
     @GetMapping("{id}")
     @Operation(summary = "部门管理", description = "查看菜单")
-    public Result<DeptCO> findById(@PathVariable("id") Long id) {
+    public Result<DeptCO> findById( @PathVariable("id") Long id ) {
         return Result.success(deptsService.findById(new DeptGetQry(id)));
     }
 
     @DeleteMapping
     @Operation(summary = "部门管理", description = "删除菜单")
     @PreAuthorize("hasAuthority('depts:remove')")
-    public Result<Boolean> remove(@RequestBody Long[] ids) {
+    public Result<Boolean> remove( @RequestBody Long[] ids ) {
         deptsService.remove(new DeptRemoveCmd(ids));
         return Result.success(true);
     }
 
     @GetMapping("{roleId}/ids")
     @Operation(summary = "部门管理", description = "部门IDS")
-    public Result<List<Long>> findIds(@PathVariable("roleId") Long roleId) {
+    public Result<List<Long>> findIds( @PathVariable("roleId") Long roleId ) {
         return Result.success(deptsService.findIds(new DeptIdsGetQry(roleId)));
     }
 }

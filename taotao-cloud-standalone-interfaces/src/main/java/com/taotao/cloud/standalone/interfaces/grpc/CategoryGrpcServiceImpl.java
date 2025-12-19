@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.standalone.interfaces.grpc;
 
+import com.taotao.cloud.standalone.api.grpc.CategoryGrpcServiceGrpc;
 import com.taotao.cloud.standalone.api.grpc.CategoryGrpcServiceGrpc.CategoryGrpcServiceImplBase;
 import com.taotao.cloud.standalone.api.grpc.FirstCategoryGrpcRequest;
 import com.taotao.cloud.standalone.api.grpc.FirstCategoryGrpcResponse;
@@ -23,13 +24,20 @@ import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 //import net.devh.boot.grpc.server.service.GrpcService;
 
+/**
+ * CategoryGrpcServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Slf4j
 //@GrpcService
 public class CategoryGrpcServiceImpl extends CategoryGrpcServiceImplBase {
 
     @Override
     public void firstCategory(
-            FirstCategoryGrpcRequest request, StreamObserver<FirstCategoryGrpcResponse> responseObserver) {
+            FirstCategoryGrpcRequest request, StreamObserver<FirstCategoryGrpcResponse> responseObserver ) {
         super.firstCategory(request, responseObserver);
     }
 }

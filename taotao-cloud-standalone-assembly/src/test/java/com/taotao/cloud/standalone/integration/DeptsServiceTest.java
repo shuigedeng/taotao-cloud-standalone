@@ -26,25 +26,31 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * DeptsServiceTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DeptsServiceTest extends TaoTaoCloudStandaloneApplicationTests {
 
     @Autowired
     private DeptsService deptsService;
 
     @TtcTest(duration = 1000, reporter = HtmlReporter.class)
-	//@Test
+    //@Test
     public void helloTest1111111() throws InterruptedException {
-		System.out.println("Hello Junit5111111111111");
-
+        System.out.println("Hello Junit5111111111111");
 
         int i = deptsService.hashCode();
 
-		DeptGetQry qry = new DeptGetQry();
-		qry.setId(1L);
-		DeptCO deptCO = deptsService.findById(qry);
+        DeptGetQry qry = new DeptGetQry();
+        qry.setId(1L);
+        DeptCO deptCO = deptsService.findById(qry);
 
         Thread.sleep(100);
-		Assertions.assertNull(deptCO);
+        Assertions.assertNull(deptCO);
     }
 
 }

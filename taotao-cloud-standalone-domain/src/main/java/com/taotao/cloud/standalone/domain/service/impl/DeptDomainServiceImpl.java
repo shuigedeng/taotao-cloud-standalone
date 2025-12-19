@@ -22,6 +22,13 @@ import com.taotao.cloud.standalone.domain.service.DeptDomainService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * DeptDomainServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 @AllArgsConstructor
 public class DeptDomainServiceImpl implements DeptDomainService {
@@ -29,17 +36,17 @@ public class DeptDomainServiceImpl implements DeptDomainService {
     private DeptDomainRepository deptDomainRepository;
 
     @Override
-    public void create( DeptEntity dept) {
+    public void create( DeptEntity dept ) {
         deptDomainRepository.create(dept);
     }
 
     @Override
-    public void modify( DeptEntity dept) {
+    public void modify( DeptEntity dept ) {
         deptDomainRepository.modify(dept);
     }
 
     @Override
-    public void remove(Long[] ids) {
+    public void remove( Long[] ids ) {
         deptDomainRepository.remove(ids);
     }
 }

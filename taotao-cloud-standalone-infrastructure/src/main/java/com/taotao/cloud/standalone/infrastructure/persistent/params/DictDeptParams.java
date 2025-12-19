@@ -22,6 +22,13 @@ import lombok.ToString;
 
 import java.util.List;
 
+/**
+ * DictDeptParams
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Setter
 @Getter
 @ToString

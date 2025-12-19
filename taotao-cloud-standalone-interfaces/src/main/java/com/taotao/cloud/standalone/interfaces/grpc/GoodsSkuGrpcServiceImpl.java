@@ -18,26 +18,36 @@ package com.taotao.cloud.standalone.interfaces.grpc;
 
 import com.taotao.cloud.standalone.api.grpc.GoodsSkuGrpcRequest;
 import com.taotao.cloud.standalone.api.grpc.GoodsSkuGrpcResponse;
+import com.taotao.cloud.standalone.api.grpc.GoodsSkuGrpcServiceGrpc;
 import com.taotao.cloud.standalone.api.grpc.GoodsSkuGrpcServiceGrpc.GoodsSkuGrpcServiceImplBase;
 import io.grpc.stub.StreamObserver;
 //import net.devh.boot.grpc.server.service.GrpcService;
 
+//import net.devh.boot.grpc.server.service.GrpcService;
+
 //@GrpcService
+/**
+ * GoodsSkuGrpcServiceImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class GoodsSkuGrpcServiceImpl extends GoodsSkuGrpcServiceImplBase {
 
     @Override
-    public void updateBatchById(GoodsSkuGrpcRequest request, StreamObserver<GoodsSkuGrpcResponse> responseObserver) {
+    public void updateBatchById( GoodsSkuGrpcRequest request, StreamObserver<GoodsSkuGrpcResponse> responseObserver ) {
         super.updateBatchById(request, responseObserver);
     }
 
     @Override
-    public void updateGoodsStuck(GoodsSkuGrpcRequest request, StreamObserver<GoodsSkuGrpcResponse> responseObserver) {
+    public void updateGoodsStuck( GoodsSkuGrpcRequest request, StreamObserver<GoodsSkuGrpcResponse> responseObserver ) {
         super.updateGoodsStuck(request, responseObserver);
     }
 
     @Override
     public void getGoodsSkuByIdFromCache(
-            GoodsSkuGrpcRequest request, StreamObserver<GoodsSkuGrpcResponse> responseObserver) {
+            GoodsSkuGrpcRequest request, StreamObserver<GoodsSkuGrpcResponse> responseObserver ) {
         super.getGoodsSkuByIdFromCache(request, responseObserver);
     }
 }

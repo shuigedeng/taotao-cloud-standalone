@@ -21,6 +21,13 @@ import com.taotao.cloud.standalone.application.command.dict.dto.clientobject.Dic
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+/**
+ * DictUpdateCmd
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Setter
 @Getter
 @ToString

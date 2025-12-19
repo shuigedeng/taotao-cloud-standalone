@@ -17,9 +17,18 @@
 package com.taotao.cloud.standalone.application.command.dict.dto.clientobject;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
+
 import lombok.*;
 
+/**
+ * DictCO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Setter
 @Getter
 @ToString

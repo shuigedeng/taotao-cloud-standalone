@@ -27,6 +27,13 @@ import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
 
+/**
+ * TaoTaoBootDemoApplicationTests
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @SpringBootTest(
         classes = TaoTaoCloudStandaloneApplication.class,
         properties = "spring.main.allow-bean-definition-overriding=true")

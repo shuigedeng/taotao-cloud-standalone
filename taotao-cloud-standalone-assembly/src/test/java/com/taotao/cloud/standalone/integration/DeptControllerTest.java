@@ -25,28 +25,35 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+/**
+ * DeptControllerTest
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 public class DeptControllerTest extends TaoTaoCloudStandaloneApplicationTests {
 
-	@Test
-	public void testGetMethod() throws Exception {
-		/**
-		 * get请求
-		 */
-		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-				"/example") // 发起GET请求，访问路径为"/example"
-			.accept(MediaType.APPLICATION_JSON)// 接受JSON格式的响应
-			.param("id", "123") //参数
-			.param("first_flag", String.valueOf(true)); //参数
+    @Test
+    public void testGetMethod() throws Exception {
+        /**
+         * get请求
+         */
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(
+                        "/example") // 发起GET请求，访问路径为"/example"
+                .accept(MediaType.APPLICATION_JSON)// 接受JSON格式的响应
+                .param("id", "123") //参数
+                .param("first_flag", String.valueOf(true)); //参数
 
-		MvcResult result = mockMvc.perform(requestBuilder)
-			.andExpect(MockMvcResultMatchers.status().isOk())  // 验证请求的HTTP状态码为200
-			.andExpect(MockMvcResultMatchers.jsonPath("$.message")
-				.value("success"))  // 验证响应中的JSON字段"message"的值为"success"
-			.andReturn();// 返回MockMvcResult对象
+        MvcResult result = mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())  // 验证请求的HTTP状态码为200
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message")
+                        .value("success"))  // 验证响应中的JSON字段"message"的值为"success"
+                .andReturn();// 返回MockMvcResult对象
 
-		MockHttpServletResponse response = result.getResponse(); //得到返回值
-		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE); //设置响应 Content-Type
-		System.out.println(response); // 打印
+        MockHttpServletResponse response = result.getResponse(); //得到返回值
+        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE); //设置响应 Content-Type
+        System.out.println(response); // 打印
 
-	}
+    }
 }

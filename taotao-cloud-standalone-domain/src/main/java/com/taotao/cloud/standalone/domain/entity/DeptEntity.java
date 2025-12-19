@@ -19,12 +19,20 @@ package com.taotao.cloud.standalone.domain.entity;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.ddd.model.domain.AggregateRoot;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PUBLIC;
 
+/**
+ * DeptEntity
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Builder
 @AllArgsConstructor(access = PUBLIC)
 @NoArgsConstructor(access = PUBLIC)
@@ -43,7 +51,7 @@ public class DeptEntity extends AggregateRoot<Long> {
     @Schema(name = "sort", description = "部门排序")
     private Integer sort;
 
-    public void checkName(long count) {
+    public void checkName( long count ) {
         if (count > 0) {
             throw new BusinessException("部门名称已存在，请重新填写");
         }

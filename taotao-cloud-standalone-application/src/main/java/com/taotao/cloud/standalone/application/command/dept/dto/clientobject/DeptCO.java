@@ -19,14 +19,23 @@ package com.taotao.cloud.standalone.application.command.dept.dto.clientobject;
 import static lombok.AccessLevel.PRIVATE;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.*;
 import lombok.NoArgsConstructor;
 
+/**
+ * DeptCO
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Setter
 @Getter
 @ToString

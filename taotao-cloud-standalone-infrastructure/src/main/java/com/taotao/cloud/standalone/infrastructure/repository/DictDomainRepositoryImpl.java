@@ -20,6 +20,15 @@ import com.taotao.cloud.standalone.domain.repository.DictDomainRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * DictDomainRepositoryImpl
+ *
+ * @author shuigedeng
+ * @version 2026.01
+ * @since 2025-12-19 09:30:45
+ */
 @Service
 @AllArgsConstructor
-public class DictDomainRepositoryImpl implements DictDomainRepository {}
+public class DictDomainRepositoryImpl implements DictDomainRepository {
+
+}
