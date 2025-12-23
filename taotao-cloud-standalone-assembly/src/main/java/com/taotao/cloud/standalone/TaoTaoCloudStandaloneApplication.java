@@ -67,7 +67,7 @@ public class TaoTaoCloudStandaloneApplication {
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-standalone")
-			.setTtcAllowBeanDefinitionOverriding(true)
+			.setTtcAllowBeanDefinitionOverriding(false)
 			.run(args);
 	}
 }
