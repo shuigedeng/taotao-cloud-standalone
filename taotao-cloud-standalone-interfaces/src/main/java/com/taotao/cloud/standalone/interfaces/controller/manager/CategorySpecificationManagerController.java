@@ -24,7 +24,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // import io.swagger.v3.oas.annotations.enums.ParameterIn;
 // import io.swagger.v3.oas.annotations.tags.Tag;
 // import java.util.List;
-// import lombok.AllArgsConstructor;
+// import lombok.RequiredArgsConstructor;
 // import org.springframework.security.access.prepost.PreAuthorize;
 // import org.springframework.validation.annotation.Validated;
 // import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +41,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // * @version 2022.04
 // * @since 2022-04-20 16:59:38
 // */
-// @AllArgsConstructor
+// @RequiredArgsConstructor
 // @Validated
 // @RestController
 // @Tag(name = "管理端-商品分类规格管理API", description = "管理端-商品分类规格管理API")

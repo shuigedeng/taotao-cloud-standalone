@@ -19,7 +19,7 @@ package com.taotao.cloud.standalone.interfaces.dubbo;
 import com.taotao.cloud.standalone.api.dubbo.GoodsRpcService;
 import com.taotao.cloud.standalone.api.dubbo.request.GoodsQueryRpcRequest;
 import com.taotao.cloud.standalone.api.dubbo.response.GoodsQueryRpcResponse;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 //import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:26:36
  */
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 //@DubboService(interfaceClass = GoodsRpcService.class, validation = "true")
 public class GoodsRpcServiceImpl implements GoodsRpcService {
 

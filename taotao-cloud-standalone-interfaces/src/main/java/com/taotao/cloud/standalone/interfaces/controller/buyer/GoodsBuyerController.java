@@ -36,7 +36,7 @@ package com.taotao.cloud.standalone.interfaces.controller.buyer; /// *
 // import jakarta.validation.constraints.NotNull;
 // import java.util.List;
 // import java.util.Map;
-// import lombok.AllArgsConstructor;
+// import lombok.RequiredArgsConstructor;
 // import org.springframework.data.elasticsearch.core.SearchPage;
 // import org.springframework.security.access.prepost.PreAuthorize;
 // import org.springframework.validation.annotation.Validated;
@@ -53,7 +53,7 @@ package com.taotao.cloud.standalone.interfaces.controller.buyer; /// *
 // * @version 2022.04
 // * @since 2022-04-20 16:59:38
 // */
-// @AllArgsConstructor
+// @RequiredArgsConstructor
 // @Validated
 // @RestController
 // @Tag(name = "买家端-商品API", description = "买家端-商品API")
