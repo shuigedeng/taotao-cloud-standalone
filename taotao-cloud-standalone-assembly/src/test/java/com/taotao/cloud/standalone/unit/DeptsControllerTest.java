@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
  * DeptsControllerTest
  *
  * @author shuigedeng
- * @version 2026.01
+ * @version 2026.02
  * @since 2025-12-19 09:30:45
  */
 @WebMvcTest(DeptsController.class) // 仅加载与 UserController 相关的 Web 层组件进行测试
