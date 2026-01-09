@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.standalone.api.dubbo;
+package com.taotao.cloud.standalone.api.rpc;
 
 
-import com.taotao.cloud.standalone.api.dubbo.request.GoodsQueryRpcRequest;
-import com.taotao.cloud.standalone.api.dubbo.response.GoodsQueryRpcResponse;
+import com.taotao.cloud.standalone.api.rpc.request.GoodsQueryRpcRequest;
+import com.taotao.cloud.standalone.api.rpc.response.GoodsQueryRpcResponse;
 
 /**
  * 后台部门表服务接口

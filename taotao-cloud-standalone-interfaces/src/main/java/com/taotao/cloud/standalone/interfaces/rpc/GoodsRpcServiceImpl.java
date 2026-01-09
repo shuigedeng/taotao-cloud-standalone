@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.standalone.interfaces.dubbo;
+package com.taotao.cloud.standalone.interfaces.rpc;
 
-import com.taotao.cloud.standalone.api.dubbo.GoodsRpcService;
-import com.taotao.cloud.standalone.api.dubbo.request.GoodsQueryRpcRequest;
-import com.taotao.cloud.standalone.api.dubbo.response.GoodsQueryRpcResponse;
+import com.taotao.cloud.standalone.api.rpc.GoodsRpcService;
+import com.taotao.cloud.standalone.api.rpc.request.GoodsQueryRpcRequest;
+import com.taotao.cloud.standalone.api.rpc.response.GoodsQueryRpcResponse;
 import lombok.RequiredArgsConstructor;
 //import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;

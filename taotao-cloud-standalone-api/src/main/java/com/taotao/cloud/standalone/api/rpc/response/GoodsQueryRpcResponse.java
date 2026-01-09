@@ -14,33 +14,35 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.standalone.api.dubbo.request;
+package com.taotao.cloud.standalone.api.rpc.response;
 
-import java.io.Serial;
+import io.soabase.recordbuilder.core.RecordBuilder;
+
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.*;
-import lombok.NoArgsConstructor;
 
 /**
- * 菜单查询对象
+ * CompanyBO
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2021-10-09 15:27:42
+ * @since 2021-10-19 20:47:05
  */
-@Setter
-@Getter
-@ToString
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class GoodsQueryRpcRequest implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 5126530068827085130L;
+@RecordBuilder
+public record GoodsQueryRpcResponse(
+	/* 租户id */
+	String tenantId,
 
-    /** id */
-    private Long id;
+	/*
+	  租户密钥
+	 */
+	String tenantSecret,
 
+	/** 公司名称 */
+	String name,
+
+	/** 公司类型 */
+	Integer type)
+	implements Serializable {
+
+	static final long serialVersionUID = 5126530068827085130L;
 }
