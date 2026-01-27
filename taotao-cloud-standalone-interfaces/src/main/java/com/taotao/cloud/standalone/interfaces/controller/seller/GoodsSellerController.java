@@ -136,7 +136,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    })
 //    @RequestLogger("修改商品")
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
-//    @PutMapping(value = "/{goodsId}")
+//    @PostMapping(value = "/{goodsId}")
 //    public Result<Boolean> update(@Validated @RequestBody GoodsOperationDTO goodsOperationDTO, @PathVariable Long
 // goodsId) {
 //        return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
@@ -145,7 +145,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    @Operation(summary = "下架商品", description = "下架商品")
 //    @RequestLogger("下架商品")
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
-//    @PutMapping(value = "/under")
+//    @PostMapping(value = "/under")
 //    public Result<Boolean> underGoods(@Validated @NotEmpty(message = "商品id不能为空") @RequestBody List<Long> goodsId) {
 //        return Result.success(goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.DOWN, "商家下架"));
 //    }
@@ -154,7 +154,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //
 //    @RequestLogger("上架商品")
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
-//    @PutMapping(value = "/up")
+//    @PostMapping(value = "/up")
 //    public Result<Boolean> unpGoods(@RequestParam List<Long> goodsId) {
 //        return Result.success(goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.UPPER, ""));
 //    }
@@ -162,7 +162,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    @Operation(summary = "删除商品", description = "删除商品")
 //    @RequestLogger("删除商品")
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
-//    @DeleteMapping
+//    @PostMapping
 //    public Result<Boolean> deleteGoods(@Validated @NotEmpty(message = "商品信息不能为空") @RequestBody List<Long> goodsIds) {
 //        return Result.success(goodsService.deleteGoods(goodsIds));
 //    }
@@ -197,7 +197,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    @Operation(summary = "修改商品库存", description = "修改商品库存")
 //    @RequestLogger("修改商品库存")
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
-//    @PutMapping(value = "/stocks")
+//    @PostMapping(value = "/stocks")
 //    public Result<Boolean> updateStocks(@Validated @RequestBody List<GoodsSkuStockDTO> updateStockList) {
 //        Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 //        // 获取商品skuId集合
