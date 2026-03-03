@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.application.command.dict.dto;
 
-import com.taotao.boot.ddd.model.application.dto.Command;
+import com.taotao.boot.common.model.ddd.types.Command;;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.*;
@@ -35,7 +35,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "DictGetQry", description = "查看字典命令请求")
-public class DictGetQry extends Command {
+public class DictGetQry implements Command {
 
     @Schema(name = "id", description = "ID")
     private Long id;
