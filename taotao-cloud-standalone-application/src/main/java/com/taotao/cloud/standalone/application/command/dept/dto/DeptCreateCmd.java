@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.application.command.dept.dto;
 
-import com.taotao.boot.common.model.ddd.types.Command;;
+import com.taotao.boot.common.model.ddd.types.Command;
 import com.taotao.cloud.standalone.application.command.dept.dto.clientobject.DeptCO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
