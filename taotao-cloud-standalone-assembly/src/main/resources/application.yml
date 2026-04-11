@@ -23,7 +23,7 @@ apollo:
   override-system-properties: false
   #元数据中心地址  Meta server地址也可以填入IP，如http://1.1.1.1:8080,http://2.2.2.2:8080，
   #过生产环境还是建议使用域名（走slb），因为机器扩容、缩容等都可能导致IP列表的变化。
-  meta: http://192.168.218.2:8080
+  meta: http://127.0.0.1:8080
   #config-service: http://config-service-url:port
   #缓存根目录
   cache-dir: d:\\apollo
