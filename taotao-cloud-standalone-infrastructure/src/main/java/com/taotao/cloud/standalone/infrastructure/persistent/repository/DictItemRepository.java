@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.infrastructure.persistent.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.standalone.infrastructure.persistent.persistence.DictItemPO;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.standalone.infrastructure.persistent.persistence.DictIte
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface DictItemRepository extends JpaSuperRepository<DictItemPO, Long> {}
+public interface DictItemRepository extends BaseRepository<DictItemPO> {}

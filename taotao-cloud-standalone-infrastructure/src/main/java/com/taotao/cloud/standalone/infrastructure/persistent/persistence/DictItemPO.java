@@ -17,7 +17,7 @@
 package com.taotao.cloud.standalone.infrastructure.persistent.persistence;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BasePO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @Table(name = DictItemPO.TABLE_NAME)
 @TableName(DictItemPO.TABLE_NAME)
 // @org.hibernate.annotations.Table(appliesTo = DictItem.TABLE_NAME, comment = "字典项表")
-public class DictItemPO extends BaseSuperEntity<DictItemPO, Long> {
+public class DictItemPO extends BasePO<DictItemPO> {
 
     public static final String TABLE_NAME = "ttc_dict_item";
 

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.infrastructure.persistent.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.standalone.infrastructure.persistent.params.DictDeptParams;
 import com.taotao.cloud.standalone.infrastructure.persistent.persistence.DictPO;
 import org.apache.ibatis.annotations.Param;
@@ -31,7 +31,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface DictMapper extends MpSuperMapper<DictPO, Long> {
+public interface DictMapper extends BaseMapper<DictPO> {
 
     @Select(
             """

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.infrastructure.persistent.mapper;
 
-import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.MpSuperMapper;
+import com.taotao.boot.data.mybatis.mybatisplus.base.mapper.BaseMapper;
 import com.taotao.cloud.standalone.infrastructure.persistent.persistence.DeptPO;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,7 +29,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface DeptMapper extends MpSuperMapper<DeptPO, Long> {
+public interface DeptMapper extends BaseMapper<DeptPO> {
 
     /**
      * 根据角色ID查看部门.

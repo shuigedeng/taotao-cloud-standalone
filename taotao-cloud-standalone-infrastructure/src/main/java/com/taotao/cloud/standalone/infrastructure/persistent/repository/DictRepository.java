@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.standalone.infrastructure.persistent.repository;
 
-import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.BaseRepository;
 import com.taotao.cloud.standalone.infrastructure.persistent.persistence.DictPO;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.QueryRewriter;
@@ -28,7 +28,7 @@ import org.springframework.data.jpa.repository.QueryRewriter;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface DictRepository extends JpaSuperRepository<DictPO, Long>, QueryRewriter {
+public interface DictRepository extends BaseRepository<DictPO>, QueryRewriter {
 
     @Override
     default String rewrite(String query, Sort sort) {
