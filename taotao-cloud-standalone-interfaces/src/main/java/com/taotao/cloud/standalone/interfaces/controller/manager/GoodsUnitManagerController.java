@@ -59,7 +59,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 //    @RequestLogger("分页获取商品计量单位")
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
 //    @GetMapping(value = "/page")
-//    public Result<PageResult<GoodsUnit>> getByPage(PageQuery pageQuery) {
+//    public Result<PageResult<GoodsUnit>> queryByPage(PageQuery pageQuery) {
 //        IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
 //        return Result.success(MpUtils.convertMybatisPage(page, GoodsUnit.class));
 //    }

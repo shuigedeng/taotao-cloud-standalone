@@ -71,7 +71,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    @RequestLogger("分页获取商品列表")
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
 //    @GetMapping("/page")
-//    public Result<PageResult<GoodsCO>> getByPage(@Validated GoodsPageQuery goodsPageQuery) {
+//    public Result<PageResult<GoodsCO>> queryByPage(@Validated GoodsPageQuery goodsPageQuery) {
 //        // 当前登录商家账号
 //        Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 //        goodsPageQuery.setStoreId(storeId);

@@ -65,7 +65,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 //    @RequestLogger("分页获取")
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
 //    @GetMapping(value = "/page")
-//    public Result<PageResult<GoodsCO>> getByPage(@Validated GoodsPageQuery goodsPageQuery) {
+//    public Result<PageResult<GoodsCO>> queryByPage(@Validated GoodsPageQuery goodsPageQuery) {
 //        IPage<Goods> goodsPage = goodsService.standaloneQueryPage(goodsPageQuery);
 //        return Result.success(MpUtils.convertMybatisPage(goodsPage, GoodsCO.class));
 //    }

@@ -50,7 +50,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    @RequestLogger
 //    @PreAuthorize("hasAuthority('dept:tree:data')")
 //    @GetMapping("/page")
-//    public Result<PageResult<GoodsUnitCO>> getByPage(@Validated PageQuery pageQuery) {
+//    public Result<PageResult<GoodsUnitCO>> queryByPage(@Validated PageQuery pageQuery) {
 //        IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
 //        return Result.success(MpUtils.convertMybatisPage(page, GoodsUnitConvert.INSTANCE::convert));
 //    }
