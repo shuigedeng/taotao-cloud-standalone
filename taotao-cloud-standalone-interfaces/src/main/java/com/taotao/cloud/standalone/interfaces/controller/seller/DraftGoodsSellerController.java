@@ -61,7 +61,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //        Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 //        draftGoodsPageQuery.setStoreId(storeId);
 //        IPage<DraftGoods> draftGoods = draftGoodsService.draftGoodsQueryPage(draftGoodsPageQuery);
-//        return Result.success(MpUtils.convertMybatisPage(draftGoods, DraftGoodsCO.class));
+//        return Result.success(MpUtils.convertMpPage(draftGoods, DraftGoodsCO.class));
 //    }
 //
 //    @Operation(summary = "获取草稿商品", description = "获取草稿商品")

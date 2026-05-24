@@ -52,6 +52,6 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    @GetMapping("/page")
 //    public Result<PageResult<GoodsUnitCO>> queryByPage(@Validated PageQuery pageQuery) {
 //        IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
-//        return Result.success(MpUtils.convertMybatisPage(page, GoodsUnitConvert.INSTANCE::convert));
+//        return Result.success(MpUtils.convertMpPage(page, GoodsUnitConvert.INSTANCE::convert));
 //    }
 // }

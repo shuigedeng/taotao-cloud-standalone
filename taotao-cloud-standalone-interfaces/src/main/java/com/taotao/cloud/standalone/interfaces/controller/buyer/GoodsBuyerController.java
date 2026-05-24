@@ -107,7 +107,7 @@ package com.taotao.cloud.standalone.interfaces.controller.buyer; /// *
 //	@GetMapping("/page")
 //	public Result<PageResult<GoodsCO>> queryByPage(@Validated GoodsPageQuery goodsPageQuery) {
 //		IPage<Goods> goodsPage = goodsService.standaloneQueryPage(goodsPageQuery);
-//		return Result.success(MpUtils.convertMybatisPage(goodsPage, GoodsCO.class));
+//		return Result.success(MpUtils.convertMpPage(goodsPage, GoodsCO.class));
 //	}
 //
 //	@Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息")

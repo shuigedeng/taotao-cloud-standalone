@@ -95,7 +95,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 //    @GetMapping(value = "/page")
 //    public Result<PageResult<BrandCO>> brandsQueryPage(@Validated BrandPageQuery page) {
 //        IPage<BrandPO> brandPage = brandService.brandsQueryPage(page);
-//        return Result.success(MpUtils.convertMybatisPage(brandPage, BrandCO.class));
+//        return Result.success(MpUtils.convertMpPage(brandPage, BrandCO.class));
 //    }
 //
 //    @Operation(summary = "新增品牌", description = "新增品牌")

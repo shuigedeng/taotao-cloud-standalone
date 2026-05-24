@@ -67,7 +67,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 //    @GetMapping(value = "/page")
 //    public Result<PageResult<GoodsCO>> queryByPage(@Validated GoodsPageQuery goodsPageQuery) {
 //        IPage<Goods> goodsPage = goodsService.standaloneQueryPage(goodsPageQuery);
-//        return Result.success(MpUtils.convertMybatisPage(goodsPage, GoodsCO.class));
+//        return Result.success(MpUtils.convertMpPage(goodsPage, GoodsCO.class));
 //    }
 //
 //    @Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
@@ -79,7 +79,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 //    @GetMapping(value = "/sku/page")
 //    public Result<PageResult<GoodsSkuCO>> getSkuByPage(@Validated GoodsPageQuery goodsPageQuery) {
 //        IPage<GoodsSku> goodsSkuPage = goodsSkuService.standaloneSkuQueryPage(goodsPageQuery);
-//        return Result.success(MpUtils.convertMybatisPage(goodsSkuPage, GoodsSkuConvert.INSTANCE::convert));
+//        return Result.success(MpUtils.convertMpPage(goodsSkuPage, GoodsSkuConvert.INSTANCE::convert));
 //    }
 //
 //    @Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品")
@@ -92,7 +92,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 //    public Result<PageResult<GoodsCO>> getAuthPage(@Validated GoodsPageQuery goodsPageQuery) {
 //        goodsPageQuery.setAuthFlag(GoodsAuthEnum.TOBEAUDITED.name());
 //        IPage<Goods> goodsPage = goodsService.standaloneQueryPage(goodsPageQuery);
-//        return Result.success(MpUtils.convertMybatisPage(goodsPage, GoodsCO.class));
+//        return Result.success(MpUtils.convertMpPage(goodsPage, GoodsCO.class));
 //    }
 //
 //    @Operation(summary = "管理员下架商品", description = "管理员下架商品")

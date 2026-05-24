@@ -76,7 +76,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //        Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 //        goodsPageQuery.setStoreId(storeId);
 //        IPage<Goods> goodsPage = goodsService.standaloneQueryPage(goodsPageQuery);
-//        return Result.success(MpUtils.convertMybatisPage(goodsPage, GoodsCO.class));
+//        return Result.success(MpUtils.convertMpPage(goodsPage, GoodsCO.class));
 //    }
 //
 //    @Operation(summary = "分页获取商品Sku列表", description = "分页获取商品Sku列表")
@@ -88,7 +88,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //        Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 //        goodsPageQuery.setStoreId(storeId);
 //        IPage<GoodsSku> goodsSkuPage = goodsSkuService.standaloneSkuQueryPage(goodsPageQuery);
-//        return Result.success(MpUtils.convertMybatisPage(goodsSkuPage, GoodsSkuCO.class));
+//        return Result.success(MpUtils.convertMpPage(goodsSkuPage, GoodsSkuCO.class));
 //    }
 //
 //    @Operation(summary = "分页获取库存告警商品列表", description = "分页获取库存告警商品列表")
@@ -107,7 +107,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //        // 商品SKU列表
 //        IPage<GoodsSku> goodsSkuPage = goodsSkuService.standaloneSkuQueryPage(goodsPageQuery);
 //        StockWarningCO stockWarning =
-//                new StockWarningCO(stockWarnNum, MpUtils.convertMybatisPage(goodsSkuPage, GoodsSkuCO.class));
+//                new StockWarningCO(stockWarnNum, MpUtils.convertMpPage(goodsSkuPage, GoodsSkuCO.class));
 //        return Result.success(stockWarning);
 //    }
 //

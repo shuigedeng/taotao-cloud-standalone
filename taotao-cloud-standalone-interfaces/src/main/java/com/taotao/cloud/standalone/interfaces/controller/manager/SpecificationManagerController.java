@@ -69,7 +69,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 //    @GetMapping
 //    public Result<PageResult<SpecificationCO>> page(@Validated SpecificationPageQuery specificationPageQuery) {
 //        IPage<Specification> specificationPage = specificationService.getPage(specificationPageQuery);
-//        return Result.success(MpUtils.convertMybatisPage(specificationPage, SpecificationConvert.INSTANCE::convert));
+//        return Result.success(MpUtils.convertMpPage(specificationPage, SpecificationConvert.INSTANCE::convert));
 //    }
 //
 //    @Operation(summary = "保存规格", description = "保存规格")
