@@ -153,7 +153,7 @@ Maven:
 * **taotao-cloud-goods**: [https://github.com/shuigedeng/taotao-cloud-goods](https://github.com/shuigedeng/taotao-cloud-goods)
 
 
-* **taotao-cloud-standalone**: [https://github.com/shuigedeng/taotao-cloud-standalone](https://github.com/shuigedeng/taotao-cloud-standalone)
+* **taotao-cloud-order**: [https://github.com/shuigedeng/taotao-cloud-order](https://github.com/shuigedeng/taotao-cloud-order)
 
 
 * **taotao-cloud-member**: [https://github.com/shuigedeng/taotao-cloud-member](https://github.com/shuigedeng/taotao-cloud-member)
