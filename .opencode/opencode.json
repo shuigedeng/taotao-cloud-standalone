@@ -4,17 +4,8 @@
   "default_agent": "build",
   "lsp": {
     "java": {
-      "command": [
-        "java",
-        "-jar",
-        "C:/Users/Lenovo/AppData/Local/opencode/lsp/java-language-server.jar"
-      ],
-      "extensions": [
-        "java"
-      ],
-      "settings": {
-        "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m --enable-preview"
-      }
+      "command": ["java", "-jar", "C:/Users/Lenovo/AppData/Local/opencode/lsp/java-language-server.jar"],
+      "extensions": ["java"]
     }
   },
   "permission": {
@@ -24,7 +15,7 @@
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
-    "write": "allow",
+    "write": "ask",
     "task": "allow",
     "webfetch": "allow",
     "websearch": "allow",
