@@ -1,120 +1,105 @@
-## 3. DDD 模块化规则
-
-**`.claude/rules/aggregate-design.md`**
-```markdown
-# 聚合设计规范
+# 聚合设计规范 — taotao-cloud-standalone
 
 ## 聚合识别原则
 
 ### 1. 事务边界
-聚合内修改必须在一个事务中完成，聚合间使用最终一致性。
+聚合内修改在一个事务中完成，聚合间使用最终一致性（通过领域事件）。
+
+### 2. 一致性规则
+- **强一致性**: 聚合内保证
+- **最终一致性**: 聚合间通过领域事件保证
+
+### 3. 跨聚合引用
+通过 ID 引用，而非对象引用：
 
 ```java
-// ✅ 正确：聚合内事务
-@Aggregate
-public class Order {
-    public void addItem(Product product, int quantity) {
-        // 校验库存（聚合内规则）
-        if (product.getStock() < quantity) {
-            throw new DomainException("库存不足");
-        }
-        this.items.add(new OrderItem(product, quantity));
-        this.totalAmount = calculateTotal();
+// ✅ 正确：跨聚合用 ID
+public class DictAggregateRoot {
+    private Long id;
+    private String dictName;
+    private List<DictItem> items;  // 聚合内实体用对象引用
+    // 无跨聚合引用（本聚合不依赖其他聚合）
+}
+
+// ❌ 错误：不应直接引用其他聚合的对象
+public class OrderAggregateRoot {
+    private Customer customer;  // Customer 是另一个聚合根
+}
+
+// ✅ 正确：改为 ID 引用
+public class OrderAggregateRoot {
+    private Long customerId;    // 跨聚合用 ID
+}
+```
+
+## 聚合根设计模板
+
+```java
+// domain/aggregate/DictAggregateRoot.java
+public class DictAggregateRoot {
+    // 聚合内实体用对象引用
+    private List<DictEntity> items;
+    // 跨聚合用 ID 引用
+    private Long parentId;
+
+    // 业务行为方法（不是 setter）
+    public void addItem(DictEntity item) {
+        // 校验业务规则
+        // 修改内部状态
+        // 注册领域事件
     }
+
+    // 无参构造（JPA 要求），protected
+    protected DictAggregateRoot() {}
+
+    // 静态工厂方法
+    public static DictAggregateRoot create(String name) { ... }
 }
+```
 
-// ❌ 错误：跨聚合事务
-public class Order {
-    public void addItem(Product product, int quantity) {
-        // 不应该直接调用Product聚合的方法
-        product.reduceStock(quantity);  
-    }
-}
-2. 一致性规则
-强一致性: 聚合内保证
+## 聚合根方法设计
 
-最终一致性: 聚合间通过事件保证
+### 命令方法（状态变更 — 有业务语义的名字）
+```java
+// ✅ 正确：有业务语义
+public void submit() { ... }
+public void cancel(String reason) { ... }
+public void activate() { ... }
 
-3. 聚合大小
-小聚合原则: 一个聚合根通常只包含1-3个实体
+// ❌ 错误：贫血模型
+public void setStatus(OrderStatus status) { ... }
+```
 
-性能考虑: 避免加载过多数据
+### 查询方法（只读）
+```java
+public boolean isPending() { return status == OrderStatus.PENDING; }
+public boolean canTransitionTo(OrderStatus target) { ... }
+```
 
-java
-// ✅ 好的设计：小聚合
-@Aggregate
-public class Order {
-    private OrderId id;
-    private List<OrderItem> items;  // 只包含必要实体
-    private Money totalAmount;
-}
+## 聚合大小
+- **小聚合原则**: 一个聚合根通常只包含 1-3 个实体
+- **性能考虑**: 避免加载过多不必要的数据
 
-// ❌ 坏的设计：大聚合
-@Aggregate
-public class Order {
-    private List<OrderItem> items;
-    private Customer customer;  // 不应该包含Customer聚合
-    private Payment payment;     // 不应该包含Payment聚合
-    private Shipping shipping;   // 不应该包含Shipping聚合
-}
-4. 聚合根标识
-使用值对象作为ID，而非基本类型：
+## 不变性维护
 
-java
-// ✅ 正确
-public class OrderId implements Serializable {
-    private final String value;
-    
-    public OrderId(String value) {
-        this.value = value;
-    }
-    // equals/hashCode
-}
+聚合根必须保证内部不变量，所有业务规则在聚合内执行：
 
-// ❌ 错误
-public class Order {
-    @Id
-    private Long id;  // 基本类型无法表达业务语义
-}
-聚合根方法设计
-命令方法（状态变更）
-java
-public class Order {
-    // 命令方法：有业务语义
-    public void submit() { ... }
-    public void cancel(String reason) { ... }
-    public void pay(Money amount) { ... }
-    
-    // 而不是
-    public void setStatus(OrderStatus status) { ... }  // 贫血模型
-}
-查询方法（只读）
-java
-public class Order {
-    public boolean isPending() {
-        return status == OrderStatus.PENDING;
-    }
-    
-    public Money calculateTax(TaxPolicy policy) {
-        return policy.calculate(this.totalAmount);
-    }
-}
-不变性维护
-聚合根必须保证内部不变量：
-
-java
-public class Order {
-    public void addItem(OrderItem item) {
-        // 不变性1: 订单必须是待支付状态
+```java
+public class OrderAggregateRoot {
+    public void addItem(ProductId productId, Money price, int quantity) {
         if (status != OrderStatus.PENDING) {
             throw new DomainException("只有待支付订单可以添加商品");
         }
-        
-        // 不变性2: 商品数量不能超过库存
-        if (item.getQuantity() > 100) {
-            throw new DomainException("单次购买数量不能超过100");
+        if (quantity <= 0) {
+            throw new DomainException("数量必须大于 0");
         }
-        
-        items.add(item);
+        // 业务逻辑...
     }
 }
+```
+
+## 聚合根禁止行为
+
+- ❌ 注入 Repository 或 Domain Service
+- ❌ 包含基础设施逻辑（如序列化、网络调用）
+- ❌ 暴露内部集合的引用（应返回不可变副本）

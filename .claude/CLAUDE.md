@@ -1,425 +1,246 @@
-# SpringBoot DDD 架构开发规范
+# taotao-cloud-standalone — DDD + CQRS 单体服务
 
-## 项目架构概述
+## 技术栈
 
-本项目采用 **领域驱动设计（DDD）** 分层架构，严格遵循六边形架构思想。
+| 技术 | 版本 |
+|------|------|
+| JDK | 25（预览特性，需 `--enable-preview`） |
+| Gradle | 9.5 |
+| Spring Boot | 4.1.0 |
+| Spring Cloud | 2025.1.1 |
+| Spring Cloud Alibaba | 2025.1.0.0 |
+| Spring Security | 7.1.0 |
+| MyBatis-Plus | 3.5.16 |
+| Querydsl | 5.1.0 |
+| MapStruct | 1.6.3 |
+| Hutool | 5.8.44 |
+| Knife4j / Swagger | 4.5.0 / 3.0.0 |
+| Redisson | 4.3.1 |
+| RocketMQ | 5.2.4 |
+| Netty | 4.2.12.Final |
 
-### 包结构规范（必须遵守）
-com.company.product/
-├── domain/ # 领域层（核心业务逻辑）
-│ ├── model/ # 领域模型
-│ │ ├── aggregate/ # 聚合根
-│ │ │ └── order/
-│ │ │ ├── Order.java # 聚合根
-│ │ │ ├── OrderItem.java # 实体
-│ │ │ └── OrderStatus.java # 值对象
-│ │ ├── valueobject/ # 值对象
-│ │ │ ├── Money.java
-│ │ │ ├── Address.java
-│ │ │ └── Email.java
-│ │ └── event/ # 领域事件
-│ │ ├── OrderCreatedEvent.java
-│ │ └── OrderPaidEvent.java
-│ ├── service/ # 领域服务
-│ │ └── PricingService.java
-│ ├── repository/ # 仓储接口
-│ │ └── OrderRepository.java
-│ ├── specification/ # 规格模式
-│ │ └── OrderSpecification.java
-│ └── factory/ # 工厂
-│ └── OrderFactory.java
-├── application/ # 应用层（用例编排）
-│ ├── service/ # 应用服务
-│ │ ├── OrderApplicationService.java
-│ │ └── dto/ # 应用层DTO
-│ │ ├── CreateOrderCommand.java
-│ │ └── OrderDto.java
-│ ├── port/ # 端口（入站/出站）
-│ │ ├── inbound/ # 入站端口（API接口）
-│ │ │ └── OrderUseCase.java
-│ │ └── outbound/ # 出站端口（SPI接口）
-│ │ ├── PaymentPort.java
-│ │ └── NotificationPort.java
-│ └── handler/ # 事件处理器
-│ └── OrderEventHandler.java
-├── infrastructure/ # 基础设施层
-│ ├── repository/ # 仓储实现
-│ │ ├── JpaOrderRepository.java
-│ │ └── mapper/ # ORM映射
-│ │ └── OrderMapper.java
-│ ├── config/ # 配置
-│ │ ├── BeanConfiguration.java
-│ │ └── JpaConfiguration.java
-│ └── adapter/ # 适配器
-│ ├── payment/ # 支付适配器
-│ │ └── AlipayAdapter.java
-│ └── notification/ # 通知适配器
-│ └── SmsAdapter.java
-└── interfaces/ # 接口层
-├── rest/ # REST API
-│ ├── OrderController.java
-│ └── dto/ # REST DTO
-│ ├── OrderRequest.java
-│ └── OrderResponse.java
-└── message/ # 消息监听
-└── OrderMessageListener.java
+## 项目结构 — 八模块 DDD 分层
 
-text
+```
+taotao-cloud-standalone/
+├── api/                  # RPC/gRPC 接口定义 + DTO（纯接口模块，无业务依赖）
+├── application/          # 应用层：CQRS Executor 编排、DTO 转换、事务、事件监听
+│   ├── command/{biz}/
+│   │   ├── dto/                    # Cmd/Qry DTO + clientobject/
+│   │   └── executor/               # 写 Executor + query/ 读 Executor
+│   ├── service/                    # 应用服务（薄门面，委托给 Executor）
+│   ├── converter/                  # MapStruct 转换器（DTO ↔ Domain Entity）
+│   ├── adapter/                    # 应用层适配器
+│   └── event/                      # 事件监听（RocketMQ 等）
+├── assembly/             # Spring Boot 启动器 + application-{env}.yml
+├── common/               # 公共工具、枚举、常量
+├── domain/               # ★ 领域层（零外部依赖）
+│   ├── aggregate/        # 聚合根
+│   ├── entity/           # 实体
+│   ├── val/              # 值对象（final 字段、无 setter、构造自验证）
+│   ├── event/            # 领域事件
+│   ├── repository/       # 仓储接口
+│   ├── service/          # 领域服务（接口 + impl）
+│   └── adapter/          # 领域适配器（防腐层接口）
+├── facade/               # 防腐层（ACL）— 独立 Gradle 模块
+├── infrastructure/       # 持久化、MQ、事件、缓存、配置
+│   ├── persistent/
+│   │   ├── persistence/  # JPA @Entity（PO）
+│   │   ├── mapper/       # MyBatis-Plus Mapper
+│   │   ├── repository/   # Spring Data JPA Repository
+│   │   └── params/       # 查询参数
+│   ├── repository/       # 领域仓储实现
+│   ├── event/            # 事件发布（Guava/Redis）
+│   ├── cache/            # Redis 缓存
+│   ├── roketmq/          # RocketMQ 配置
+│   └── properties/       # 配置属性
+└── interfaces/           # REST / RPC / gRPC
+    ├── controller/
+    │   ├── buyer/        # C 端 API
+    │   ├── seller/       # B 端 API
+    │   └── manager/      # 管理端 API
+    ├── rpc/              # RPC 实现
+    └── grpc/             # gRPC 实现
+```
+
+## 核心架构约定
+
+### 依赖方向（严格禁止违反）
+```
+api  ←  interfaces  →  application  →  facade
+                          ↓
+                    domain  ←  infrastructure
+```
+- `domain`：零外部依赖（不依赖 Spring、不依赖数据库、不依赖框架）
+- `application`：依赖 `domain`，可依赖 `facade` 接口
+- `infrastructure`：依赖 `domain` 实现仓储，依赖 `application` 实现事件订阅
+- `interfaces`：依赖 `application`，不直接依赖 `infrastructure`
+
+### CQRS + Executor 模式
+```java
+// application/command/dict/executor/DictInsertCmdExe.java
+@Component
+@RequiredArgsConstructor
+public class DictInsertCmdExe {
+    private final DictDomainService dictDomainService;
+
+    public Boolean execute(DictInsertCmd cmd) {
+        // 参数校验 → 调用领域服务 → 返回结果
+        return dictDomainService.insert(dictConvertor.toEntity(cmd));
+    }
+}
+
+// application/service/impl/DictsServiceImpl.java（薄门面）
+@Service
+@RequiredArgsConstructor
+public class DictsServiceImpl implements DictsService {
+    private final DictInsertCmdExe dictInsertCmdExe;
+
+    public Boolean insert(DictInsertCmd cmd) {
+        return dictInsertCmdExe.execute(cmd);  // 仅委托
+    }
+}
+```
+
+### 领域模型 vs 持久化模型分离
+```java
+// domain/entity/DictEntity.java — 领域模型，纯业务
+public class DictEntity { ... }
+
+// infrastructure/persistent/persistence/DictPO.java — 持久化对象
+@Entity
+@Table(name = "ttc_dict")
+public class DictPO extends BasePO<DictPO> { ... }
+```
+
+### Controller 分包规范
+```java
+@Validated
+@RestController
+@RequestMapping("/sys/manager/dict")   // manager 端
+@RequestMapping("/buyer/dict")          // buyer 端
+@RequestMapping("/seller/dict")         // seller 端
+public class ManagerDictController extends BusinessController {
+    // 只做：参数校验 + 调用 Service + Result 封装
+    // 禁止：业务逻辑、直接调用 Repository/Mapper
+}
+```
+
+## 双持久化方案
+
+| 场景 | 技术 | 位置 |
+|------|------|------|
+| 标准 CRUD | JPA Repository | `infrastructure/persistent/repository/` |
+| 复杂查询 | MyBatis-Plus Mapper | `infrastructure/persistent/mapper/` |
+| 领域仓储实现 | 组合两者 | `infrastructure/repository/` |
+
+## 事件驱动架构
+
+```
+Domain Event (domain/event/)
+  → DomainEventPublisher (infrastructure/event/)
+    → GuavaEventPublisher (同步)
+    → RedisEventPublisher (异步 Stream)
+    → RocketMQ (infrastructure/roketmq/)
+      → Application Event Listeners (application/event/)
+```
 
 ## DDD 核心原则
 
-### 1. 聚合设计原则
-- **原子性**: 聚合内保证事务一致性，聚合间使用最终一致性
-- **小聚合**: 一个聚合根只包含必要实体，避免性能问题
-- **ID引用**: 跨聚合通过ID引用，而非对象引用
-- **不变性**: 聚合根负责维护内部不变量
+### 聚合设计
+- 跨聚合通过 ID 引用，非对象引用
+- 聚合根负责维护内部不变量
+- 事务边界仅开在 `application/` 层
 
-```java
-// 聚合根示例
-@AggregateRoot
-@Entity
-@Table(name = "orders")
-public class Order {
-    @Id
-    private OrderId id;  // 值对象作为ID
-    
-    @Embedded
-    private CustomerId customerId;  // 跨聚合引用
-    
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<OrderItem> items = new ArrayList<>();
-    
-    @Embedded
-    private Money totalAmount;
-    
-    private OrderStatus status;
-    
-    // 聚合根行为方法
-    public void addItem(ProductId productId, Money price, int quantity) {
-        // 业务规则校验
-        if (status != OrderStatus.PENDING) {
-            throw new DomainException("只能向待支付订单添加商品");
-        }
-        
-        OrderItem item = new OrderItem(productId, price, quantity);
-        items.add(item);
-        recalculateTotal();
-        
-        // 注册领域事件
-        registerEvent(new OrderItemAddedEvent(id, productId, quantity));
-    }
-    
-    public void pay() {
-        if (items.isEmpty()) {
-            throw new DomainException("空订单不能支付");
-        }
-        this.status = OrderStatus.PAID;
-        registerEvent(new OrderPaidEvent(id, totalAmount));
-    }
-    
-    private void recalculateTotal() {
-        this.totalAmount = items.stream()
-            .map(OrderItem::getSubtotal)
-            .reduce(Money.ZERO, Money::add);
-    }
-    
-    // 无参构造器（JPA要求）
-    protected Order() {}
-    
-    // 工厂方法
-    public static Order create(CustomerId customerId, Address shippingAddress) {
-        Order order = new Order();
-        order.id = new OrderId(IdGenerator.next());
-        order.customerId = customerId;
-        order.status = OrderStatus.PENDING;
-        order.registerEvent(new OrderCreatedEvent(order.id));
-        return order;
-    }
-}
-2. 值对象设计
-不可变性: 所有字段final，无setter方法
+### 值对象
+- 不可变：所有字段 final，无 setter
+- 构造时自验证
+- 通过属性值判断相等性（equals/hashCode）
 
-无标识: 通过属性值判断相等性
+### 领域事件
+- 事件定义在 `domain/event/`
+- 发布在 `infrastructure/event/`
+- 订阅在 `application/event/listener/` 或 `infrastructure/event/`
 
-自验证: 构造时验证数据合法性
+## 重复代码预防（关键禁止项）
+- Controller 中写业务逻辑判断
+- Controller 直接调用 Repository 或 Mapper
+- 聚合根中注入 Repository 或 Domain Service
+- Application Service / Executor 中包含业务规则判断
+- 跨聚合直接操作其他聚合的内部状态
+- Application Service 直接调用 Mapper/Persistence
+- Executor 中写跨领域编排逻辑（应在 Service 层）
 
-java
-@ValueObject
-@Embeddable
-public class Money {
-    private final BigDecimal amount;
-    private final Currency currency;
-    
-    public Money(BigDecimal amount, Currency currency) {
-        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
-            throw new DomainException("金额不能为负数");
-        }
-        this.amount = amount;
-        this.currency = currency;
-    }
-    
-    public Money add(Money other) {
-        if (!this.currency.equals(other.currency)) {
-            throw new DomainException("货币类型不匹配");
-        }
-        return new Money(this.amount.add(other.amount), this.currency);
-    }
-    
-    // 只有getter，无setter
-    public BigDecimal getAmount() { return amount; }
-    public Currency getCurrency() { return currency; }
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Money)) return false;
-        Money money = (Money) o;
-        return amount.compareTo(money.amount) == 0 &&
-               currency.equals(money.currency);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(amount, currency);
-    }
-}
-3. 领域服务
-无状态: 不持有状态，只提供行为
+## 命名规范
 
-跨聚合: 协调多个聚合的业务逻辑
+| 元素 | 模式 | 示例 |
+|------|------|------|
+| 聚合根 | `{Entity}AggregateRoot` | `DictAggregateRoot` |
+| 实体 | `{Entity}Entity` | `DictEntity` |
+| 值对象 | `{Entity}Val` | `DictVal` |
+| 领域事件 | `{Entity}{Action}Event` | `DictCreateEvent` |
+| 仓储接口 | `{Entity}DomainRepository` | `DictDomainRepository` |
+| 领域服务 | `{Entity}DomainService` | `DictDomainService` |
+| Cmd DTO | `{Entity}{Action}Cmd` | `DictInsertCmd` |
+| Qry DTO | `{Entity}{Action}Qry` | `DictListQry` |
+| 写 Executor | `{Entity}{Action}CmdExe` | `DictInsertCmdExe` |
+| 读 Executor | `{Entity}{Action}QryExe` | `DictListQryExe` |
+| 应用 Service | `{Entity}Service` / `{Entity}ServiceImpl` | `DictsService` / `DictsServiceImpl` |
+| 转换器 | `{Entity}Convert` | `DictConvert` |
+| PO | `{Entity}PO` | `DictPO` |
+| Mapper | `{Entity}Mapper` | `DictMapper` |
+| Controller | `{Role}{Entity}Controller` | `ManagerDictController` |
 
-业务价值: 不属于任何单一聚合
+## 构建与测试命令
 
-java
-@DomainService
-@Service
-@Slf4j
-public class PricingService {
-    private final ProductRepository productRepository;
-    private final DiscountPolicy discountPolicy;
-    
-    public PricingService(ProductRepository productRepository, 
-                          DiscountPolicy discountPolicy) {
-        this.productRepository = productRepository;
-        this.discountPolicy = discountPolicy;
-    }
-    
-    /**
-     * 计算订单总价（跨聚合逻辑）
-     */
-    public Money calculateOrderPrice(Order order, CustomerType customerType) {
-        Money subtotal = Money.ZERO;
-        
-        for (OrderItem item : order.getItems()) {
-            Product product = productRepository.findById(item.getProductId())
-                .orElseThrow(() -> new DomainException("商品不存在"));
-            Money itemPrice = product.getPrice().multiply(item.getQuantity());
-            subtotal = subtotal.add(itemPrice);
-        }
-        
-        // 应用折扣策略
-        Money discount = discountPolicy.calculateDiscount(subtotal, customerType);
-        return subtotal.subtract(discount);
-    }
-}
-4. 仓储模式
-接口在领域层: 业务依赖抽象
+```bash
+# 编译
+./gradlew compileJava
 
-实现在基础设施: 技术细节隔离
+# 全量构建
+./gradlew build
 
-java
-// 领域层接口
-public interface OrderRepository {
-    Order findById(OrderId id);
-    void save(Order order);
-    void delete(OrderId id);
-    Page<Order> findByCustomerId(CustomerId customerId, Pageable pageable);
-}
+# 启动 dev 环境
+./gradlew :taotao-cloud-standalone-assembly:bootRun --args='--spring.profiles.active=dev'
 
-// 基础设施层实现
-@Repository
-public class OrderRepositoryImpl implements OrderRepository {
-    private final JpaOrderRepository jpaRepository;
-    private final OrderMapper mapper;
-    
-    @Override
-    public Order findById(OrderId id) {
-        OrderPo orderPo = jpaRepository.findById(id.getValue())
-            .orElseThrow(() -> new DomainException("订单不存在"));
-        return mapper.toDomain(orderPo);
-    }
-    
-    @Override
-    public void save(Order order) {
-        OrderPo po = mapper.toPo(order);
-        jpaRepository.save(po);
-        
-        // 发布领域事件
-        order.getDomainEvents().forEach(this::publishEvent);
-        order.clearEvents();
-    }
-}
-5. 应用服务（用例编排）
-薄薄一层: 不包含业务逻辑
+# 运行测试
+./gradlew test
+./gradlew :taotao-cloud-standalone-domain:test
 
-事务边界: 开启数据库事务
+# 代码质量门禁
+./gradlew checkstyleMain spotlessCheck pmdMain spotbugsMain
 
-协调作用: 调用领域层和基础设施
+# 安全依赖检查
+./gradlew dependencyCheckAnalyze
 
-java
-@ApplicationService
-@Service
-@Transactional
-@Slf4j
-public class OrderApplicationService implements OrderUseCase {
-    private final OrderRepository orderRepository;
-    private final PricingService pricingService;
-    private final PaymentPort paymentPort;
-    private final DomainEventPublisher eventPublisher;
-    
-    @Override
-    public OrderDto createOrder(CreateOrderCommand command) {
-        log.info("Creating order for customer: {}", command.getCustomerId());
-        
-        // 1. 创建聚合（工厂）
-        Order order = Order.create(
-            new CustomerId(command.getCustomerId()),
-            command.getShippingAddress()
-        );
-        
-        // 2. 添加商品
-        for (OrderItemCommand item : command.getItems()) {
-            order.addItem(
-                new ProductId(item.getProductId()),
-                new Money(item.getPrice(), Currency.USD),
-                item.getQuantity()
-            );
-        }
-        
-        // 3. 应用领域服务计算价格
-        Money total = pricingService.calculateOrderPrice(
-            order, 
-            command.getCustomerType()
-        );
-        
-        // 4. 保存聚合
-        orderRepository.save(order);
-        
-        // 5. 发布领域事件
-        eventPublisher.publish(order.getDomainEvents());
-        
-        return OrderDto.fromDomain(order);
-    }
-}
-6. 领域事件
-解耦聚合: 聚合间通过事件通信
+# 覆盖率报告
+./gradlew jacocoTestReport
 
-最终一致性: 使用事件处理器实现
+# 发布到本地 Maven
+./gradlew publishToMavenLocal
 
-java
-@DomainEvent
-public class OrderPaidEvent extends DomainEvent {
-    private final OrderId orderId;
-    private final Money amount;
-    private final LocalDateTime paidAt;
-    
-    public OrderPaidEvent(OrderId orderId, Money amount) {
-        this.orderId = orderId;
-        this.amount = amount;
-        this.paidAt = LocalDateTime.now();
-    }
-    
-    // Getters...
-}
+# 打包可执行 JAR
+./gradlew :taotao-cloud-standalone-assembly:bootJar
+```
 
-// 事件处理器
-@Component
-@Slf4j
-public class OrderEventHandler {
-    @EventListener
-    @Async
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void handleOrderPaid(OrderPaidEvent event) {
-        log.info("Order paid: {}, amount: {}", event.getOrderId(), event.getAmount());
-        // 发送通知、更新统计等
-    }
-}
-开发流程规范
-1. 战略设计阶段
-事件风暴: 识别领域事件、命令、聚合
+## 环境配置
 
-限界上下文: 划分业务边界
+| 环境 | 配置文件 | 用途 |
+|------|----------|------|
+| dev | `application-dev.yml` | 本地开发 |
+| test | `application-test.yml` | 测试环境 |
+| pre | `application-pre.yml` | 预发布 |
+| pro | `application-pro.yml` | 生产环境 |
 
-上下文映射: 定义上下文关系
+## 特殊注意事项
 
-2. 战术设计阶段
-识别聚合根和值对象
-
-定义领域服务和仓储接口
-
-编写领域模型测试
-
-实现应用服务和REST API
-
-3. 代码审查要点
-聚合是否保证了业务不变性
-
-值对象是否不可变
-
-仓储接口是否在领域层
-
-跨聚合是否通过ID引用
-
-领域事件是否实现最终一致性
-
-测试策略
-单元测试（领域层）
-java
-@Test
-class OrderTest {
-    @Test
-    void shouldAddItemToPendingOrder() {
-        Order order = Order.create(customerId, address);
-        order.addItem(productId, new Money(100), 2);
-        
-        assertThat(order.getTotalAmount()).isEqualTo(new Money(200));
-        assertThat(order.getDomainEvents()).hasSize(2);
-    }
-}
-集成测试（应用层）
-java
-@SpringBootTest
-@Transactional
-class OrderApplicationServiceTest {
-    @Test
-    void shouldCreateOrder() {
-        CreateOrderCommand command = createCommand();
-        OrderDto result = orderService.createOrder(command);
-        
-        assertThat(result.getId()).isNotNull();
-        assertThat(result.getStatus()).isEqualTo(OrderStatus.PENDING);
-    }
-}
-命名约定
-聚合根: 业务名词（Order, Product, User）
-
-值对象: 描述性名词（Money, Address, Email）
-
-领域服务: 动词+名词（PricingService, ShippingService）
-
-领域事件: 名词+过去式动词（OrderCreatedEvent, UserRegisteredEvent）
-
-仓储接口: 聚合根名+Repository（OrderRepository）
-
-应用服务: 聚合根名+ApplicationService（OrderApplicationService）
-
-重要提醒
-严禁在聚合根中注入仓储或领域服务
-
-严禁在值对象中添加业务行为以外的逻辑
-
-跨聚合操作必须通过应用服务协调
-
-数据库事务只能开启在应用层
-
-领域模型必须与持久化模型分离
+- JDK 25 预览特性：编译/运行均需要 `--enable-preview`
+- 大量 `--add-exports`：JDK 内部模块访问（如 `java.base/java.lang`）
+- `taotao-cloud-dependencies:2026.07` 为私有 BOM，外部构建需要私有仓库凭据
+- 代码质量门禁：Checkstyle + SpotBugs + PMD + Spotless + OWASP
+- Gradle 管理工具：Develocity（`com.gradle.develocity` 插件）
+- 基础包路径：`com.taotao.cloud.standalone`
+- `build.gradle` 使用 ext 管理版本号，非 `libs.versions.toml` 版本目录
+- MapStruct 配置了 `defaultComponentModel=spring`，无需在每个 Mapper 上声明
+- Lombok + MapStruct + Record Builder 组合使用
+- IDEA 推荐插件：TaoTaoToolKit

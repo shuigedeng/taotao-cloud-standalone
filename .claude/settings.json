@@ -1,41 +1,59 @@
-
-## 3. 团队配置
-
-**`.claude/settings.json`** - 团队共享配置
-```json
 {
-"version": "1.0",
-"permissions": {
-"read": ["src/**/*.java", "src/**/*.yml", "pom.xml"],
-"write": ["src/**/*.java", "src/**/*.xml"],
-"execute": ["./mvnw", "git", "docker"],
-"network": ["localhost:8080", "localhost:3306", "api.github.com"]
-},
-"model": {
-"default": "claude-3.5-sonnet-20240620",
-"fallback": "claude-3-opus-20240229",
-"temperature": 0.3,
-"maxTokens": 4096
-},
-"git": {
-"autoCommit": false,
-"requireTests": true,
-"commitMessageTemplate": "type(scope): description\n\nCloses #{{issue}}"
-},
-"java": {
-"buildTool": "maven",
-"testCommand": "./mvnw test",
-"compileCommand": "./mvnw compile",
-"packageCommand": "./mvnw clean package -DskipTests=false"
-},
-"integrations": {
-"jira": {
-"enabled": false,
-"project": "SPRING"
-},
-"sonarqube": {
-"enabled": true,
-"url": "http://localhost:9000"
-}
-}
+  "permissions": {
+    "allow": [
+      "read",
+      "edit",
+      "write",
+      "glob",
+      "grep",
+      "bash",
+      "lsp",
+      "task",
+      "question",
+      "skill",
+      "websearch",
+      "webfetch"
+    ],
+    "paths": {
+      "allow": [
+        "src/**",
+        "*.gradle",
+        "gradle/**",
+        ".opencode/**",
+        ".claude/**",
+        "*.{properties,xml,yml,yaml,json,md}"
+      ],
+      "deny": [
+        ".env*",
+        "**/gradle.properties",
+        "**/secrets*",
+        "**/*.cer",
+        "**/*.p12",
+        "**/*.jks",
+        "**/*.key"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "./gradlew",
+        "git",
+        "java",
+        "curl",
+        "docker*"
+      ]
+    }
+  },
+  "git": {
+    "autoCommit": false,
+    "requireTests": false,
+    "commitMessageTemplate": "type(scope): description"
+  },
+  "java": {
+    "buildTool": "gradle",
+    "version": 25,
+    "compileCommand": "gradlew compileJava",
+    "testCommand": "gradlew test",
+    "buildCommand": "gradlew build",
+    "previewFeatures": true
+  }
 }

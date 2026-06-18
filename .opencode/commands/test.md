@@ -11,12 +11,12 @@ agent: general
 
 ### 1. 运行测试
 ```bash
-./gradlew test
+gradlew test
 ```
 
 如果指定了模块参数，只运行指定模块测试：
 ```bash
-./gradlew :taotao-cloud-standalone-{module}:test
+gradlew :taotao-cloud-standalone-{module}:test
 ```
 
 ### 2. 生成覆盖率报告

@@ -1,6 +1,6 @@
 # 项目编码规范 — taotao-cloud-standalone
 
-> 补充 DDD 架构规范（详见 `.claude/CLAUDE.md` 和 `.claude/rules/`）中未覆盖的实现细节
+> 补充 DDD 架构规范（详见 `.opencode/AGENTS.md` 和 `.opencode/commands/`）中未覆盖的实现细节
 
 ---
 
@@ -36,97 +36,71 @@ private final OrderDomainRepository orderRepository;
 ## 2. 包结构规范
 
 ```
-com.taotao.cloud.order.{module}/
+com.taotao.cloud.standalone.{module}/
 ├── aggregate/     # 聚合根（@AggregateRoot）
 ├── entity/        # 实体（@Entity）
-├── valobj/        # 值对象（@ValueObject | @Embeddable）
-├── event/         # 领域事件（extends DomainEvent）
+├── val/           # 值对象（final 字段、无 setter、构造自验证）
+├── event/         # 领域事件
 ├── repository/    # 仓储接口
-└── service/       # 领域服务（@DomainService）
+├── service/       # 领域服务（@DomainService）
+└── adapter/       # 领域适配器（防腐层接口）
 ```
 
-### 聚合根的写法
+## 3. Application 层规范（CQRS + Executor 模式）
+
+本项目 Application 层采用 **CQRS + Executor** 模式，而非传统的 Service 直调仓储模式。
+
+### 目录结构
+```
+application/
+├── command/{biz}/dto/          # Command/Query DTO
+│   ├── DictInsertCmd.java
+│   ├── DictUpdateCmd.java
+│   ├── DictDeleteCmd.java
+│   ├── DictListQry.java        # 查询（Query）
+│   ├── DictGetQry.java
+│   └── clientobject/           # 客户端返回对象（CO）
+│       └── DictCO.java
+├── command/{biz}/executor/     # Command Executor（写）
+│   ├── DictInsertCmdExe.java
+│   ├── DictUpdateCmdExe.java
+│   └── query/                  # Query Executor（读）
+│       └── DictListQryExe.java
+├── service/                    # 应用服务（门面）
+│   ├── DictsService.java       # 接口
+│   └── impl/DictsServiceImpl.java
+├── converter/                  # MapStruct 转换器（DTO ↔ Domain）
+│   └── DictConvert.java
+└── adapter/                    # 应用层适配器
+    └── DictAdapter.java
+```
+
+### Executor 规范
 ```java
-@AggregateRoot
-public class OrderAgg {
-    // 聚合内实体用对象引用（非 ID）
-    private List<OrderItem> items;
+@Component
+@RequiredArgsConstructor
+public class DictInsertCmdExe {
+    private final DictDomainService dictDomainService;
 
-    // 跨聚合用 ID 引用
-    private Long customerId;
-
-    // 业务行为方法（不是 setter）
-    public void addItem(ProductId productId, Money price, int quantity) {
-        // 校验业务规则
-        // 修改内部状态
-        // 注册领域事件
-        registerEvent(new OrderItemAddedEvent(this.id, productId));
+    public Boolean execute(DictInsertCmd cmd) {
+        // 1. 参数校验
+        // 2. 调用领域服务
+        // 3. 返回结果
+        return dictDomainService.insert(dictConvertor.toEntity(cmd));
     }
-
-    // 无参构造（JPA 要求），protected
-    protected OrderAgg() {}
-
-    // 静态工厂方法
-    public static OrderAgg create(...) { ... }
 }
 ```
 
-### 值对象的写法
+### 应用服务（Service）规范
 ```java
-@Embeddable
-public class Money {
-    private final BigDecimal amount;
-    private final Currency currency;
-
-    // 构造时自验证
-    public Money(BigDecimal amount, Currency currency) {
-        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
-            throw new DomainException("金额不能为负数");
-        }
-        this.amount = amount;
-        this.currency = currency;
-    }
-
-    // 只有 getter，无 setter
-    // 覆写 equals/hashCode（基于所有属性）
-}
-```
-
-## 3. Application Service 规范
-
-### 命令服务（写操作）
-```java
-@ApplicationService
 @Service
-@Transactional
-public class OrderCommandServiceImpl implements OrderCommandService {
-    private final OrderDomainRepository orderRepository;
-    private final OrderDomainService orderDomainService;
+@RequiredArgsConstructor
+public class DictsServiceImpl implements DictsService {
+    // 委托给 Executor，不做业务逻辑
+    private final DictInsertCmdExe dictInsertCmdExe;
 
-    @Override
-    public CreateOrderResponse createOrder(CreateOrderCommand command) {
-        // 1. 构建领域对象
-        // 2. 调用领域服务（如果需要跨聚合逻辑）
-        // 3. 保存聚合
-        // 4. 发布领域事件
-        // 5. 返回 DTO
-        return CreateOrderResponse.fromDomain(order);
-    }
-}
-```
-
-### 查询服务（读操作）
-```java
-@ApplicationService
-@Service
-@Transactional(readOnly = true)
-public class OrderQueryServiceImpl implements OrderQueryService {
-    private final OrderQueryRepository orderQueryRepository;
-
-    @Override
-    public OrderDetailResult queryDetail(String orderSn) {
-        // 直接返回 DTO/Result，不经过领域模型
-        return orderQueryRepository.getDetailBySn(orderSn);
+    public Boolean insert(DictInsertCmd cmd) {
+        return dictInsertCmdExe.execute(cmd);
     }
 }
 ```
@@ -134,30 +108,30 @@ public class OrderQueryServiceImpl implements OrderQueryService {
 ## 4. Controller 规范
 
 ```java
+@Validated
 @RestController
-@RequestMapping("/{role}/order/order")
-// role = buyer | seller | manager
-public class OrderBuyerController extends BusinessController {
-    // HTTP 解析 + 参数校验 + Result 封装
-    // 禁止业务逻辑
-
-    @GetMapping("/page")
-    public Result<PageResult<OrderSimpleResult>> page(OrderPageQuery query) {
-        return Result.success(orderQueryService.pageQuery(query));
-    }
-
-    @PostMapping("/{orderSn}/cancel")
-    public Result<Void> cancel(@PathVariable String orderSn, @RequestParam String reason) {
-        orderCommandService.cancel(orderSn, reason);
-        return Result.success();
-    }
+@RequestMapping("/sys/manager/dict")
+@Tag(name = "管理端-字典管理API", description = "管理端-字典管理API")
+public class ManagerDictController extends BusinessController {
+    // 只做：参数校验 + 调用 Service + Result 封装
+    // 禁止：业务逻辑判断、直接调用 Repository/Mapper
 }
 ```
+
+Controller 按端分包：
+```
+interfaces/controller/
+├── buyer/        # C 端 API
+├── seller/       # B 端 API
+└── manager/      # 管理端 API
+```
+
+接口（RPC/gRPC）在 `interfaces/rpc/` 和 `interfaces/grpc/` 中实现，接口定义在 `api/` 模块。
 
 ## 5. 枚举规范
 
 ```java
-// 订单状态枚举，在 common 模块定义
+// 枚举在 common 模块定义
 public enum OrderStatusEnum {
     PENDING("待付款"),
     PAID("已付款"),
@@ -167,7 +141,6 @@ public enum OrderStatusEnum {
     CANCELLED("已取消");
 
     private final String description;
-    // ...
 }
 ```
 
@@ -175,26 +148,40 @@ public enum OrderStatusEnum {
 
 ```java
 // 事件定义在 domain/event/
-public class OrderCreatedEvent extends DomainEvent {
-    private final Long orderId;
-    // 不可变，构造时赋值
+@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+public class DictCreateEvent {
+    private String name;
 }
 
-// 事件在聚合根内注册
-// 仓储 save() 时自动 flush 发布
-// 订阅在 infrastructure/event/
+// 事件发布：infrastructure/event/DomainEventPublisher
+// 事件订阅：infrastructure/event/ + application/event/listener/
+// 消息队列：RocketMQ（infrastructure/roketmq/RocketmqConfig）
+//          Redis Stream（infrastructure/event/RedisEventPublisher）
 ```
 
-## 7. MapStruct + Assembler 规范
+## 7. 数据转换规范
 
+### MapStruct（application/converter/）
 ```java
-// Assembler 在 infrastructure/assembler/
-// 职责：Domain Entity ←→ Persistence PO 双向映射
+// DTO ↔ Domain Entity
+@Mapper
+public interface DictConvert {
+    DictConvert INSTANCE = Mappers.getMapper(DictConvert.class);
+    DictEntity convert(DictListQry dto);
+    DictCO convert(DictEntity entity);
+}
+```
 
+### Assembler（持久化转换在 infrastructure/）
+```java
+// Infrastructure 内实现：PO ←→ Domain Entity
 @Mapper(componentModel = "spring")
-public interface OrderAssembler {
-    OrderPo toPo(Order order);
-    Order toDomain(OrderPo po);
+public interface DictAssembler {
+    DictPO toPo(DictEntity entity);
+    DictEntity toDomain(DictPO po);
 }
 ```
 
@@ -202,22 +189,77 @@ public interface OrderAssembler {
 
 ```bash
 # 全量构建
-./gradlew build
+gradlew build
 
 # 运行所有测试
-./gradlew test
+gradlew test
 
 # 运行指定模块测试
-./gradlew :taotao-cloud-standalone-domain:test
+gradlew :taotao-cloud-standalone-domain:test
 
 # 代码质量
-./gradlew checkstyleMain spotlessCheck pmdMain spotbugsMain
+gradlew checkstyleMain spotlessCheck pmdMain spotbugsMain
 
 # 本地启动
-./gradlew :taotao-cloud-standalone-assembly:bootRun --args='--spring.profiles.active=dev'
+gradlew :taotao-cloud-standalone-assembly:bootRun --args='--spring.profiles.active=dev'
 ```
 
-## 9. 数据库规范
+## 9. 领域服务与适配器规范
+
+> 注：领域服务的初始接口定义和实现规范。领域服务放在 `domain/service/` 下而非 `domain/service/impl/`，实际编码时根据复杂度选择是否拆分接口和实现。
+
+### 领域服务（domain/service/）
+```java
+public interface DictDomainService {
+    Boolean insert(DictEntity dictEntity);
+    Boolean update(DictEntity dictEntity);
+    DictEntity getById(Long id);
+    Boolean deleteById(Long id);
+    IPage<DictEntity> list(DictEntity dictEntity, PageQuery pageQuery);
+}
+```
+- 领域服务在 `domain/service/` 定义接口，在 `domain/service/impl/` 实现
+- 领域服务可调用仓储接口（`domain/repository/`），但不依赖基础设施
+
+### 领域适配器（domain/adapter/）
+```java
+// 防腐层接口，定义在 domain/adapter/
+// 实现在 facade/ 模块
+public interface DictDomainAdapter {
+    // 外部系统调用的防腐方法
+}
+```
+
+## 10. Infrastructure 层规范
+
+### 目录结构
+```
+infrastructure/
+├── persistent/
+│   ├── persistence/    # JPA Entity（PO）
+│   ├── mapper/         # MyBatis-Plus Mapper
+│   ├── repository/     # Spring Data JPA Repository
+│   └── params/         # 查询参数对象
+├── repository/          # 领域仓储实现
+├── event/               # 事件发布/订阅
+├── cache/               # Redis 缓存
+├── roketmq/             # RocketMQ 配置
+├── properties/          # 配置属性
+├── factory/             # 工厂类
+└── util/                # 工具类
+```
+
+### 仓储实现规范
+```java
+@Service
+@AllArgsConstructor
+public class DictDomainRepositoryImpl implements DictDomainRepository {
+    // 在 infrastructure/repository/ 中实现 domain/repository/ 接口
+    // 使用 infrastructure/persistent/ 下的 Mapper 或 Repository
+}
+```
+
+## 11. 数据库规范
 
 ### 表必备字段
 ```sql

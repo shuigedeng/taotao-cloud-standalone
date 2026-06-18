@@ -1,22 +1,15 @@
----
-name: crud-generator
-description: 自动生成 DDD + CQRS 标准 CRUD 代码
-triggers:
-  - "生成CRUD"
-  - "创建增删改查"
-  - "新建模块"
----
+# Generate CRUD — 代码生成技能
 
-# CRUD 代码生成器（DDD + CQRS）
-
-适配项目：taotao-cloud-standalone
+适配项目：taotao-cloud-standalone（DDD + CQRS + Gradle + JDK 25）
 
 ## 触发条件
-用户输入包含 "生成CRUD" 或 "创建增删改查" 等关键词时自动触发。
 
-## 生成结构
+通过命令 `/apply` 或用户明确要求生成 CRUD 代码时触发。
 
-### 1. Domain 层
+## 生成模板
+
+### Domain 层
+
 ```
 domain/
 ├── aggregate/{Entity}AggregateRoot.java
@@ -25,10 +18,11 @@ domain/
 ├── event/{Entity}CreateEvent.java
 ├── repository/{Entity}DomainRepository.java
 ├── service/{Entity}DomainService.java
-└── service/impl/{Entity}DomainServiceImpl.java
+└── adapter/{Entity}DomainAdapter.java
 ```
 
-### 2. Application 层
+### Application 层
+
 ```
 application/
 ├── command/{entity}/
@@ -51,7 +45,8 @@ application/
 └── converter/{Entity}Convert.java
 ```
 
-### 3. Infrastructure 层
+### Infrastructure 层
+
 ```
 infrastructure/
 ├── persistent/
@@ -61,21 +56,14 @@ infrastructure/
 └── repository/{Entity}DomainRepositoryImpl.java
 ```
 
-### 4. Interfaces 层
+### Interfaces 层
+
 ```
 interfaces/controller/{role}/{Entity}{Role}Controller.java
 ```
 
-### 5. API 层（可选）
-```
-api/
-├── rpc/{Entity}RpcService.java
-├── rpc/request/{Entity}RpcRequest.java
-└── rpc/response/{Entity}RpcResponse.java
-```
-
-## 验证
+## 生成后验证
 
 ```bash
-./gradlew compileJava
+gradlew compileJava
 ```

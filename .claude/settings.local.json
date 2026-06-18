@@ -1,15 +1,14 @@
 {
   "permissions": {
-    "read": ["/Users/username/.m2/settings.xml"],
-    "write": ["/tmp/claude-output"],
-    "network": ["localhost:9090"]
+    "commands": {
+      "allow": ["java", "curl"]
+    }
   },
-  "model": {
-    "temperature": 0.5
+  "java": {
+    "testCommand": "./gradlew test --tests *Dict*Test"
   },
   "custom": {
     "theme": "dark",
-    "notifications": true,
-    "autoSave": true
+    "localPort": 8080
   }
 }

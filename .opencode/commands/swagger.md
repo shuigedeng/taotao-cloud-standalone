@@ -12,7 +12,7 @@ agent: general
 
 ### 2. 生成 OpenAPI 文档
 ```bash
-./gradlew :taotao-cloud-standalone-assembly:bootRun
+gradlew :taotao-cloud-standalone-assembly:bootRun
 ```
 
 启动后访问：

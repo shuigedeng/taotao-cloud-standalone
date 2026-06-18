@@ -22,7 +22,7 @@ agent: general
 
 ### 3. 验证
 ```bash
-./gradlew compileJava
+gradlew compileJava
 ```
 - 展示完整编译输出
 - 确保零 error

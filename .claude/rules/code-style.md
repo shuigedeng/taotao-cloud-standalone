@@ -1,53 +1,88 @@
-## 5. 模块化规则
-
-**`.claude/rules/code-style.md`**
-```markdown
-# 代码风格规范
+# 代码风格规范 — taotao-cloud-standalone
 
 ## 格式化规则
-- 缩进: 4 个空格（不使用 Tab）
-- 行宽: 120 字符
-- 大括号: K&R 风格（左括号不换行）
-- 缩进：4 空格
-- 包命名：`com.company.project.layer.subdomain`（如 `com.shop.order.domain.model`）
-- 类名：PascalCase，接口以 `I` 开头（可选）或直接名词（如 `OrderRepository`）
-- 方法：小驼峰，动词开头（`validateEmail`, `calculateTotal`）
-## 导入顺序
-1. Java 标准库 (java.*, javax.*)
-2. 第三方库 (org.*, com.*)
-3. Spring 框架 (org.springframework.*)
-4. 项目内部包 (com.company.project.*)
-5. 静态导入
 
-## Lombok 使用规范
+| 规则 | 值 |
+|------|-----|
+| 缩进 | 4 空格（不使用 Tab） |
+| 行宽 | 120 字符（Checkstyle 校验） |
+| 大括号 | K&R 风格（左括号不换行） |
+| 编码 | UTF-8 |
+| JDK | 25（预览特性，`--enable-preview`） |
+
+## 包命名规范
+
+```
+com.taotao.cloud.standalone.{layer}.{subdomain}
+```
+
+示例：
+- `com.taotao.cloud.standalone.domain.aggregate`
+- `com.taotao.cloud.standalone.domain.val`
+- `com.taotao.cloud.standalone.application.command.dict.executor`
+- `com.taotao.cloud.standalone.interfaces.controller.manager`
+
+## 命名约定
+
+| 元素 | 命名风格 | 示例 |
+|------|---------|------|
+| 类名 | PascalCase | `DictAggregateRoot`, `DictsServiceImpl` |
+| 接口 | PascalCase | `DictDomainService`, `DictsService` |
+| 方法 | 小驼峰 | `insert()`, `getById()`, `deleteById()` |
+| 变量 | 小驼峰 | `dictEntity`, `dictInsertCmd` |
+| 常量 | UPPER_SNAKE | `TABLE_NAME`, `DEFAULT_PAGE_SIZE` |
+| 枚举 | PascalCase | `OrderStatusEnum.PENDING` |
+| 注解 | PascalCase + 无 I 前缀 | `@Service`, `@Component`（非 `@IService`） |
+
+## 导入顺序（Checkstyle 校验）
+
+1. Java 标准库（`java.*`, `javax.*`）
+2. 第三方库（`org.*`, `com.*` 非本项目）
+3. Spring 框架（`org.springframework.*`）
+4. 项目内部包（`com.taotao.*`）
+5. 静态导入
+6. 每两组之间空一行
+
+## 代码生成工具
+
+### MapStruct
 ```java
-@Data           // 用于简单 DTO/Entity
-@Builder        // 用于构建复杂对象
-@Slf4j          // 日志记录
-@RequiredArgsConstructor  // 依赖注入
-示例代码
-java
-@Slf4j
-@Service
-@RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    
-    @Override
-    @Transactional
-    public UserResponse create(UserRequest request) {
-        log.info("Creating user with username: {}", request.getUsername());
-        
-        // 业务逻辑
-        User user = User.builder()
-            .username(request.getUsername())
-            .password(passwordEncoder.encode(request.getPassword()))
-            .build();
-        
-        User saved = userRepository.save(user);
-        log.debug("User created with id: {}", saved.getId());
-        
-        return UserResponse.from(saved);
-    }
+@Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR)
+public interface DictConvert {
+    DictConvert INSTANCE = Mappers.getMapper(DictConvert.class);
+    DictPO toPo(DictEntity entity);
+    DictEntity toDomain(DictPO po);
 }
+```
+
+### Lombok
+```java
+@Data                              // 简单 PO/DTO
+@SuperBuilder                      // 含继承的构建器
+@RequiredArgsConstructor           // final 字段构造注入
+@Slf4j                            // 日志
+@AllArgsConstructor / @NoArgsConstructor  // 全参/无参
+```
+
+### Record Builder（JDK 25 预览特性）
+```java
+@RecordBuilder
+public record DictInsertCmd(String name, String code) {}
+```
+
+## 质量门禁
+
+项目配置了自动检查的 Gradle 插件：
+
+| 工具 | 检查项 |
+|------|--------|
+| Checkstyle | 代码风格、导入顺序 |
+| Spotless | 格式化自动修复 |
+| PMD | 潜在缺陷、死代码 |
+| SpotBugs | 字节码级别 Bug 检测 |
+| OWASP | 依赖安全漏洞 |
+
+运行命令：
+```bash
+./gradlew checkstyleMain spotlessCheck pmdMain spotbugsMain
+```

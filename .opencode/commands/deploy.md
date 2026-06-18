@@ -11,13 +11,13 @@ agent: general
 
 ### 1. 运行测试
 ```bash
-./gradlew test
+gradlew test
 ```
 测试失败则中止部署。
 
 ### 2. 打包
 ```bash
-./gradlew :taotao-cloud-standalone-assembly:bootJar
+gradlew :taotao-cloud-standalone-assembly:bootJar
 ```
 
 ### 3. 启动（指定环境）

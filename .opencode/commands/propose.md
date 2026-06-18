@@ -15,7 +15,7 @@ agent: general
 ## 执行步骤
 
 ### 第一阶段：现状调查
-1. 使用 `read` + `grep` 定位涉及的模块、聚合根、领域事件
+1. 使用 `read` + `grep` 定位涉及的模块（api/application/domain/infrastructure/interfaces/facade）、聚合根、领域事件、Executor
 2. 标注每个结论的代码出处（文件路径 + 类名/方法名）
 
 ### 第二阶段：逐个澄清

@@ -23,7 +23,9 @@ agent: general
 | 仓储接口 | `domain/repository/` | 接口在 domain |
 | 应用服务（编排） | `application/service/` | 事务边界，不含业务规则 |
 | 仓储实现 | `infrastructure/persistent/repository/` | PO 映射 |
-| 数据传输 | `application/dto/` + `application/assembler/` | 数据转换 |
+| 数据传输 | `application/command/*/dto/` + `application/command/*/dto/clientobject/` | DTO + CO |
+| 命令执行器 | `application/command/*/executor/` | CmdExe（写）/ QryExe（读） |
+| MapStruct 转换 | `application/converter/` | DTO ↔ Domain Entity |
 | REST API | `interfaces/controller/` | 按端 buyer/seller/manager |
 | RPC/gRPC 接口定义 | `api/` | 接口 + DTO |
 | RPC/gRPC 实现 | `interfaces/rpc/` 或 `interfaces/grpc/` | 实现类 |
@@ -35,7 +37,7 @@ agent: general
 2. 使用 `edit` 或 `write` 修改代码
 3. 验证编译：
 ```bash
-./gradlew compileJava
+gradlew compileJava
 ```
 4. Git Commit
 ```bash
