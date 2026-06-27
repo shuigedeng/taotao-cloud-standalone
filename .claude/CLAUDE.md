@@ -236,7 +236,7 @@ Domain Event (domain/event/)
 
 - JDK 25 预览特性：编译/运行均需要 `--enable-preview`
 - 大量 `--add-exports`：JDK 内部模块访问（如 `java.base/java.lang`）
-- `taotao-cloud-dependencies:2026.07` 为私有 BOM，外部构建需要私有仓库凭据
+- `taotao-cloud-dependencies:2026.08` 为私有 BOM，外部构建需要私有仓库凭据
 - 代码质量门禁：Checkstyle + SpotBugs + PMD + Spotless + OWASP
 - Gradle 管理工具：Develocity（`com.gradle.develocity` 插件）
 - 基础包路径：`com.taotao.cloud.standalone`
