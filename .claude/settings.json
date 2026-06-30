@@ -1,59 +1,37 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
-      "read",
-      "edit",
-      "write",
-      "glob",
-      "grep",
-      "bash",
-      "lsp",
-      "task",
-      "question",
-      "skill",
-      "websearch",
-      "webfetch"
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(git *)",
+      "Bash(gradlew *)",
+      "LSP",
+      "Task",
+      "Question",
+      "Skill",
+      "WebSearch",
+      "WebFetch"
     ],
-    "paths": {
-      "allow": [
-        "src/**",
-        "*.gradle",
-        "gradle/**",
-        ".opencode/**",
-        ".claude/**",
-        "*.{properties,xml,yml,yaml,json,md}"
-      ],
-      "deny": [
-        ".env*",
-        "**/gradle.properties",
-        "**/secrets*",
-        "**/*.cer",
-        "**/*.p12",
-        "**/*.jks",
-        "**/*.key"
-      ]
-    },
-    "commands": {
-      "allow": [
-        "./gradlew",
-        "git",
-        "java",
-        "curl",
-        "docker*"
-      ]
-    }
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(git push *)"
+    ],
+    "deny": [
+      "Read(./.env*)",
+      "Read(./secrets/**)",
+      "Read(*.{cer,p12,jks,key})",
+      "Bash(rm -rf /)",
+      "Bash(curl *)",
+      "Bash(wget *)"
+    ],
+    "defaultMode": "acceptEdits"
   },
-  "git": {
-    "autoCommit": false,
-    "requireTests": false,
-    "commitMessageTemplate": "type(scope): description"
-  },
-  "java": {
-    "buildTool": "gradle",
-    "version": 25,
-    "compileCommand": "gradlew compileJava",
-    "testCommand": "gradlew test",
-    "buildCommand": "gradlew build",
-    "previewFeatures": true
+  "env": {
+    "JAVA_TOOL_OPTIONS": "--enable-preview",
+    "GRADLE_OPTS": "--enable-preview --add-exports java.base/java.lang=ALL-UNNAMED --add-exports java.base/java.util=ALL-UNNAMED"
   }
 }
