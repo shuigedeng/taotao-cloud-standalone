@@ -21,7 +21,7 @@ import com.taotao.cloud.standalone.api.rpc.request.GoodsQueryRpcRequest;
 import com.taotao.cloud.standalone.api.rpc.response.GoodsQueryRpcResponse;
 
 /**
- * 后台部门表服务接口
+ * 商品 RPC 服务接口
  *
  * @author shuigedeng
  * @version 2022.03
