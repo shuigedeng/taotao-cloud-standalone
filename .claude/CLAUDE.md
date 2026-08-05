@@ -19,7 +19,7 @@
 | RocketMQ | 5.2.4 |
 | Netty | 4.2.12.Final |
 
-`build.gradle` 使用 **ext** 管理版本号（非 `libs.versions.toml`）。`taotao-cloud-dependencies:2026.08` 为私有 BOM，外部构建需私有仓库凭据。
+`build.gradle` 使用 **ext** 管理版本号（非 `libs.versions.toml`）。`taotao-cloud-dependencies:2026.09` 为私有 BOM，外部构建需私有仓库凭据。
 
 ## 项目结构
 
@@ -181,7 +181,7 @@ DDD 聚合设计、值对象、领域服务、代码风格、API 规范、测试
 
 - **JDK 25 预览特性**：编译和运行均需 `--enable-preview`，Gradle JVM 参数在 `gradle.properties` 中已有配置
 - **JVM `--add-exports`**：大量 JDK 内部模块访问（`java.base/java.lang`、`jdk.compiler/com.sun.tools.javac.*`），已配置在 `gradle.properties` 中
-- **私有 BOM**：`taotao-cloud-dependencies:2026.08` 需私有仓库凭据，外部构建无法直接运行
+- **私有 BOM**：`taotao-cloud-dependencies:2026.09` 需私有仓库凭据，外部构建无法直接运行
 - **代码质量门禁**：Checkstyle + SpotBugs + PMD + Spotless + OWASP 均为强制步骤，`build` 任务中包含
 - **MapStruct**：`defaultComponentModel=spring` 已全局配置，Mapper 接口上无需重复声明 `@Mapper(componentModel = "spring")`
 - **IDEA 插件**：推荐安装 TaoTaoToolKit（项目定制插件）
