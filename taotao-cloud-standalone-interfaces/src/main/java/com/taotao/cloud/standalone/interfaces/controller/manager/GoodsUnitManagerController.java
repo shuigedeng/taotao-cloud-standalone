@@ -46,7 +46,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // @Validated
 // @RestController
 // @Tag(name = "管理端-商品计量单位管理API", description = "管理端-商品计量单位管理API")
-// @RequestMapping("/goods/manager/goods/unit")
+// @RequestMapping("/goods/admin/goods/unit")
 // public class GoodsUnitManagerController extends BusinessController {
 //
 //    /** 商品计量服务 */

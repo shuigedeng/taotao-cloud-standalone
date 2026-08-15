@@ -45,7 +45,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // @Validated
 // @RestController
 // @Tag(name = "管理端-商品分类规格管理API", description = "管理端-商品分类规格管理API")
-// @RequestMapping("/goods/manager/category/spec")
+// @RequestMapping("/goods/admin/category/spec")
 // public class CategorySpecificationManagerController extends BusinessController {
 //
 //    /** 分类规格服务 */

@@ -46,7 +46,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // @Validated
 // @RestController
 // @Tag(name = "管理端-分类绑定参数组API", description = "管理端-分类绑定参数组API")
-// @RequestMapping("/goods/manager/category/parameters")
+// @RequestMapping("/goods/admin/category/parameters")
 // public class CategoryParameterGroupManagerController extends BusinessController {
 //
 //    /** 商品参数组服务 */

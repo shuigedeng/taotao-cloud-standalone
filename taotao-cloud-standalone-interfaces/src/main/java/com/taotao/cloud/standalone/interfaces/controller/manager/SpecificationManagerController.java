@@ -46,7 +46,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // @Validated
 // @RestController
 // @Tag(name = "管理端-商品规格管理API", description = "管理端-商品规格管理API")
-// @RequestMapping("/goods/manager/spec")
+// @RequestMapping("/goods/admin/spec")
 // public class SpecificationManagerController extends BusinessController {
 //
 //    /**

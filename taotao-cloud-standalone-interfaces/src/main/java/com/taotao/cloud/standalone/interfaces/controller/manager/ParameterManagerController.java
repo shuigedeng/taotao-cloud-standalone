@@ -44,7 +44,7 @@ package com.taotao.cloud.standalone.interfaces.controller.manager; /// *
 // @Validated
 // @RestController
 // @Tag(name = "管理端-参数管理API", description = "管理端-参数管理API")
-// @RequestMapping("/goods/manager/parameters")
+// @RequestMapping("/goods/admin/parameters")
 // public class ParameterManagerController extends BusinessController {
 //
 //    /** 参数服务 */
