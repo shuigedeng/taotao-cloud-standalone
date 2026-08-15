@@ -38,8 +38,8 @@ public class DeptsServiceTest extends TaoTaoCloudStandaloneApplicationTests {
     @Autowired
     private DeptsService deptsService;
 
-    @TtcTest(duration = 1000, reporter = HtmlReporter.class)
     //@Test
+    @TtcTest(duration = 1000, reporter = HtmlReporter.class)
     public void helloTest1111111() throws InterruptedException {
         System.out.println("Hello Junit5111111111111");
 

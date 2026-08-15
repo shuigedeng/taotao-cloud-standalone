@@ -31,8 +31,8 @@ import lombok.extern.slf4j.Slf4j;
  * @version 2026.04
  * @since 2025-12-19 09:30:45
  */
-@Slf4j
 //@GrpcService
+@Slf4j
 public class CategoryGrpcServiceImpl extends CategoryGrpcServiceImplBase {
 
     @Override

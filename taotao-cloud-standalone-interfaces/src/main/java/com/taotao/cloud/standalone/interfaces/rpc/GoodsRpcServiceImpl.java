@@ -30,9 +30,9 @@ import org.springframework.stereotype.Service;
  * @version 2021.10
  * @since 2021-10-09 20:26:36
  */
+//@DubboService(interfaceClass = GoodsRpcService.class, validation = "true")
 @Service
 @RequiredArgsConstructor
-//@DubboService(interfaceClass = GoodsRpcService.class, validation = "true")
 public class GoodsRpcServiceImpl implements GoodsRpcService {
 
     @Override

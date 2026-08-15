@@ -22,12 +22,12 @@ import java.util.List;
  * @version 2026.04
  * @since 2025-12-19 09:30:45
  */
-@Setter
-@Getter
 //@Import({com.taotao.boot.security.spring.configuration.PropertiesAutoConfiguration.class,
 //	org.springframework.cache.support.NoOpCacheManager.class,
 //	org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.class,})
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Setter
+@Getter
 @TestPropertySource(properties = {
         "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver",
         "spring.datasource.url=jdbc:mysql://127.0.0.1:3306/taotao-cloud-goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&useCursorFetch=true",
