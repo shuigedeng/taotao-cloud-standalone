@@ -73,15 +73,15 @@ import java.util.Objects;
  * @Transient：注解表示在生成数据库的表时，该属性被忽略，即不生成对应的字段 字典表
  * @since 2021-10-09 21:10:04
  */
+
+// @NamedQuery(name = "User.findByEmailAddress",
+//	query = "select u from User u where u.emailAddress = ?1")
+// @org.hibernate.annotations.Table(appliesTo = Dict.TABLE_NAME, comment = "字典表")
 @Getter
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-
-// @NamedQuery(name = "User.findByEmailAddress",
-//	query = "select u from User u where u.emailAddress = ?1")
-// @org.hibernate.annotations.Table(appliesTo = Dict.TABLE_NAME, comment = "字典表")
 @Entity
 @Table(name = DictPO.TABLE_NAME)
 @TableName(DictPO.TABLE_NAME)
@@ -236,3 +236,4 @@ public class DictPO extends BasePO<DictPO> {
         }
     }
 }
+
