@@ -7,7 +7,7 @@
 
 ## OVERVIEW
 
-DDD 单体服务（商品/分类/字典/部门领域），基于 Spring Boot 4.1.0 / JDK 25 / Gradle 9.5。
+DDD 单体服务（商品/分类/字典/部门领域），基于 Spring Boot 4.1.1 / JDK 25 / Gradle 9.5。
 严格遵循六边形架构 + 领域驱动设计 + CQRS 模式。
 
 ## PROJECT STRUCTURE
