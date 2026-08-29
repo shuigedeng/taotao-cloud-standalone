@@ -168,7 +168,7 @@ gradlew publishToMavenLocal                                         # 发布到�
 
 - JDK 25 预览特性，编译/运行均需要 `--enable-preview`
 - `--add-exports` 大量 JDK 内部模块（`java.base/java.lang` 等）
-- `taotao-cloud-dependencies:2026.09` BOM 未开源，外部构建需私有仓库凭据
+- `taotao-cloud-dependencies:2026.10` BOM 未开源，外部构建需私有仓库凭据
 - 四个环境配置：dev / test / pre / pro
 - 代码质量门禁：Checkstyle + SpotBugs + PMD + Spotless + OWASP Dependency Check
 - Gradle 9.5，管理工具：Develocity（`com.gradle.develocity` 插件）
