@@ -59,14 +59,14 @@ public class DeptsController extends BusinessController {
     @Operation(summary = "部门管理", description = "查询菜单列表")
     @PostMapping("list")
     @PreAuthorize("hasAuthority('depts:list')")
-    public Result<List<DeptCO>> findList( @RequestBody DeptListQry qry ) {
+    public Result<List<DeptCO>> findList( @Valid @RequestBody DeptListQry qry ) {
         return Result.success(deptsService.findList(qry));
     }
 
     @Operation(summary = "部门管理", description = "新增菜单")
     @PostMapping
     @PreAuthorize("hasAuthority('depts:create')")
-    public Result<Boolean> create( @RequestBody DeptCreateCmd cmd ) {
+    public Result<Boolean> create( @Valid @RequestBody DeptCreateCmd cmd ) {
         deptsService.create(cmd);
         return Result.success(true);
     }
@@ -74,7 +74,7 @@ public class DeptsController extends BusinessController {
     @Operation(summary = "部门管理", description = "修改菜单")
     @PostMapping
     @PreAuthorize("hasAuthority('depts:modify')")
-    public Result<Boolean> modify( @RequestBody DeptModifyCmd cmd ) {
+    public Result<Boolean> modify( @Valid @RequestBody DeptModifyCmd cmd ) {
         deptsService.modify(cmd);
         return Result.success(true);
     }
@@ -88,7 +88,7 @@ public class DeptsController extends BusinessController {
     @Operation(summary = "部门管理", description = "删除菜单")
     @PostMapping
     @PreAuthorize("hasAuthority('depts:remove')")
-    public Result<Boolean> remove( @RequestBody Long[] ids ) {
+    public Result<Boolean> remove( @Valid @RequestBody Long[] ids ) {
         deptsService.remove(new DeptRemoveCmd(ids));
         return Result.success(true);
     }
