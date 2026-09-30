@@ -22,7 +22,6 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 // import com.taotao.boot.common.model.result.Result;
 // import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 // import com.taotao.cloud.standalone.api.enums.standaloneStatusEnum;
-// import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 // import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
 // import com.taotao.boot.web.request.annotation.RequestLogger;
 // import io.swagger.v3.oas.annotations.Operation;
@@ -65,7 +64,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    /** 商品sku */
 //    private final IGoodsSkuService goodsSkuService;
 //    /** 店铺详情 */
-//    private final IFeignStoreDetailApi storeDetailApi;
+//    private final AclServiceStoreDetailApi storeDetailApi;
 //
 //    @Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
 //    @RequestLogger("分页获取商品列表")

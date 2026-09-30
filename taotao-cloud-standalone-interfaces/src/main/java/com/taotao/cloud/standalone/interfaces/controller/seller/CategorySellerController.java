@@ -18,7 +18,6 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //
 // import com.taotao.boot.common.model.result.Result;
 // import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-// import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 // import com.taotao.boot.web.request.annotation.RequestLogger;
 // import io.swagger.v3.oas.annotations.Operation;
 // import io.swagger.v3.oas.annotations.tags.Tag;
@@ -50,7 +49,7 @@ package com.taotao.cloud.standalone.interfaces.controller.seller; /// *
 //    /** 分类品牌服务 */
 //    private final ICategoryBrandService categoryBrandService;
 //    /** 店铺详情服务 */
-//    private final IFeignStoreDetailApi storeDetailApi;
+//    private final AclServiceStoreDetailApi storeDetailApi;
 //
 //    @Operation(summary = "获取店铺经营的分类", description = "获取店铺经营的分类")
 //    @RequestLogger("获取店铺经营的分类")
